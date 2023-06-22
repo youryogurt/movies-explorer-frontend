@@ -1,0 +1,83 @@
+.login__section {
+  max-width: 396px;
+  width: 100%;
+  height: auto;
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.form__title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #FFFFFF;
+  margin-top: 0;
+  margin-bottom: 40px;
+}
+
+.form__label {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #8B8B8B;
+  display: flex;
+  flex-direction: column;
+}
+
+.form__input {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+  padding: 5px 0 10px 0;
+  border: none;
+  outline: none;
+  background-color: #202020;
+  width: 100%;
+  border-bottom: 1px solid #424242;
+
+}
+
+.form__input:not(:last-child) {
+  margin-bottom: 24px;
+}
+
+.form__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 45px;
+  background-color: #4285F4;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 3px;
+  margin-top: 240px;
+}
+
+.form__question {
+  margin-top: 16px;
+  align-self: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #8B8B8B;
+}
+
+.form__link {
+  text-decoration: none;
+  cursor: pointer;
+  color: #4285F4;
+  margin-left: 6px;
+}

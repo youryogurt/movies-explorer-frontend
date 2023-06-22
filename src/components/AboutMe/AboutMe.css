@@ -1,0 +1,124 @@
+.about-me {
+  width: calc(100% - 2 * 70px);
+  max-width: 1140px;
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+}
+
+.about-me__info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 68px;
+}
+
+.about-me__text {
+  max-width: 600px;
+}
+
+.about-me__name {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  /* line-height: 58px; */
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.about-me__job {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #FFFFFF;
+  margin: 18px 0 0 0;
+}
+
+.about-me__description {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #FFFFFF;
+  margin: 26px 0 100px 0;
+}
+
+.about-me__github {
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+}
+
+.about-me__photo {
+  width: 270px;
+  max-height: 326px;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+  .about-me  {
+    width: calc(100% - 2 * 50px);
+  }
+
+  .about-me__name {
+    font-size: 40px;
+  }
+
+  .about-me__job {
+    font-size: 12px;
+  }
+
+  .about-me__description {
+    font-size: 12px;
+    margin-bottom: 86px;
+  }
+
+  .about-me__photo {
+    /* max-height: 306px; */
+    height: auto;
+    /* width: 255px; */
+    margin-left: 40px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .about-me  {
+    width: calc(100% - 2 * 14px);
+  }
+
+  .about-me__info  {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-top: 0;
+    padding-top: 38px;
+  }
+
+  .about-me__name {
+    font-size: 30px;
+  }
+
+  .about-me__job {
+    font-size: 11px;
+  }
+
+  .about-me__description {
+    font-size: 11px;
+    line-height: 16px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+  .about-me__photo {
+    height: 352px;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 40px;
+  }
+}

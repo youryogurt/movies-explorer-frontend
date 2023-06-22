@@ -1,0 +1,49 @@
+.nav-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+.nav-tab__button {
+  background-color: #303030;
+  color: #FFFFFF;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  padding: 20 auto;
+  width: 90px;
+  height: 60px;
+}
+
+.nav-tab__button:not(:last-child) {
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+  .nav-tab__button{
+    width: 96px;
+    height: 36px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .nav-tab{
+    padding-bottom: 16px;
+  }
+
+  .nav-tab__button{
+    width: 82px;
+    height: 26px;
+    font-size: 10px;
+  }
+
+  .nav-tab__button:not(:last-child) {
+    margin-right: 6px;
+  }
+}

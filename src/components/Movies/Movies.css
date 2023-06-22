@@ -1,0 +1,18 @@
+.more-button {
+  align-self: center;
+  margin: 50px auto 80px auto;
+  background-color: #202020;
+  border: 1px solid #424242;
+  max-width: 320px;
+  width: 100%;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FFFFFF;
+}
