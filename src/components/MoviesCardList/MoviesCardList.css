@@ -9,3 +9,19 @@
   margin-right: auto;
   justify-self: center;
 }
+
+@media screen and (max-width: 1024px) {
+  .movies-card-list { 
+    grid-template-columns: 1fr 1fr;
+    column-gap: 36px;
+    width: calc(100% - 2 * 30px);
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .movies-card-list { 
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+    width: calc(100% - 2 * 10px);
+  }
+}

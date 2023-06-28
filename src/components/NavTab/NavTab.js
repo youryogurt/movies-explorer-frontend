@@ -3,9 +3,9 @@ import React from 'react';
 function NavTab() {
   return (
     <div className="nav-tab">
-      <button className="nav-tab__button">О проекте</button>
-      <button className="nav-tab__button">Технологии</button>
-      <button className="nav-tab__button">Студент</button>
+      <a href="#project-section" className="nav-tab__link">О проекте</a>
+      <a href="#techs-section" className="nav-tab__link">Технологии</a>
+      <a href="#about-me-section" className="nav-tab__link">Студент</a>
     </div>
   )
 }

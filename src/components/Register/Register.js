@@ -7,12 +7,14 @@ function Register() {
       <h2 className="form__title">Добро пожаловать!</h2>
       <label className="form__label">Имя
         <input className="form__input"/>
+        <span className="form__error"></span>
       </label>
       <label className="form__label">E-mail
         <input className="form__input"/>
+        <span className="form__error"></span>
       </label>
       <label className="form__label">Пароль
-        <input className="form__input"/>
+        <input className="form__input form__input_last"/>
         <span className="form__error">Что-то пошло не так...</span>
       </label>
       <button className="form__button">Зарегистрироваться</button>

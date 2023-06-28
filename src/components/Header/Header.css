@@ -1,16 +1,42 @@
 .header {
-  /* display: flex;
-  justify-content: center; */
   padding-top: 18px;
   width: calc(100% - 2 * 70px);
   max-width: 1140px;
+  /* width: auto; */
   align-self: center;
   margin-left: auto;
   margin-right: auto;
-  height: 38px;
+  min-height: 38px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid red; */
+}
+
+.header__auth {
+  max-width: 396px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .logo {
   width: 38px;
   height: 38px;
+}
+
+.logo__routes{
+  padding-left: 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .header {
+    width: calc(100% - 2 * 30px);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .header {
+    width: calc(100% - 2 * 14px);
+  }
 }

@@ -15,4 +15,19 @@
   font-size: 12px;
   line-height: 15px;
   color: #FFFFFF;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 520px) {
+  .more-button { 
+    width: 240px;
+    margin-top: 80px;
+    margin-bottom: 160px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .more-button { 
+    width: 240px;
+  }
 }

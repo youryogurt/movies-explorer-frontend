@@ -17,8 +17,7 @@
   line-height: 29px;
   color: #FFFFFF;
   align-self: center;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto 86px auto;
   align-self: center;
 }
 
@@ -77,4 +76,16 @@
   line-height: 16px;
   color: #EE3465;
   text-decoration: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .profile__section{ 
+    margin-top: 236px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .profile__section { 
+    max-width: calc(100% - 2 * 30px);
+  }
 }

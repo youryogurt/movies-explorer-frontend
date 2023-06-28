@@ -13,7 +13,7 @@ function Portfolio() {
         <p className="portfolio__link-text">Адаптивный сайт</p>
         <a className="portfolio__link" href="https://youryogurt.github.io/russian-travel/">↗</a>
       </li>
-      <li className="portfolio__list-element">
+      <li className="portfolio__list-element portfolio__list-element_last">
         <p className="portfolio__link-text">Одностраничное приложение</p>
         <a className="portfolio__link" href="https://github.com/youryogurt/react-mesto-api-full-gha">↗</a>
       </li>

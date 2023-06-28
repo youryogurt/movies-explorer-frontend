@@ -1,30 +1,29 @@
 import "../../index.css";
-import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Header from "../Header/Header";
-// import Navigation from "../Navigation/Navigation";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
+import Edit from "../Edit/Edit";
 import NotFound from "../NotFound/NotFound";
 import Footer from "../Footer/Footer";
 
 function App() {
   return (
     <div className="app">
-      <Header/>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/saved-movies" element={<SavedMovies />}/>
-        <Route path="/signin" element={<Login />}/>
-        <Route path="/signup" element={<Register />}/>
-        <Route path="/profile" element={<Profile />}/>
-        <Route path="/404" element={<NotFound />}/>
+        <Route path="/" element={<><Header/> <Main/> <Footer/></>} />
+        <Route path="/movies" element={<><Header/> <Movies/> <Footer/></>} />
+        <Route path="/saved-movies" element={<><Header/> <SavedMovies/> <Footer/></>}/>
+        <Route path="/signin" element={<><Header/> <Login/> </>}/>
+        <Route path="/signup" element={<><Header/> <Register/> </>}/>
+        <Route path="/profile" element={<><Header/> <Profile/> </>}/>
+        <Route path="/edit" element={<><Header/> <Edit/> </>}/>
+        <Route path="/*" element={<NotFound />}/>
       </Routes>
-      <Footer/>
     </div>
   );
 }

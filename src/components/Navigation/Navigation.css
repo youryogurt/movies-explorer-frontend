@@ -1,0 +1,163 @@
+.navigation-start-page {
+  /* justify-self: flex-end; */
+  /* margin-right: 0;
+  margin-left: auto; */
+  /* justify-self: right; */
+}
+
+.navigation__button {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.navigation__button_signup {
+  background: #202020;
+  color: #FFF;
+  padding-right: 30px;
+}
+
+.navigation__button_signin {
+  border-radius: 3px;
+  background: #3DDC84;
+  min-height: 32px;
+  min-width: 76px;
+}
+
+.navigation-movies-page {
+  /* justify-self: flex-start; */
+  border: 1px solid green;
+  padding-right: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 44px;
+  flex-grow: 1;
+  /* width: 100%; */
+  /* здесь самый правый элемент выпирает, нужно будет пофиксить ширину */
+}
+
+.navigation__button_films {
+  padding-right: 16px;
+}
+
+.navigation__button_films {
+  width: auto;
+  color: #FFF;
+  background: #202020;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  display: inline;
+}
+
+.navigation__button_saved_films {
+  width: auto;
+  color: #FFF;
+  background: #202020;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.navigation__button_profile {
+  min-width: 100px;
+  min-height: 32px;
+  color: #FFF;
+  background: #313131;
+  border-radius: 20px;
+  /* justify-self: flex-end; */
+}
+
+.navigation__link_mobile {
+  display: none;
+}
+
+.mobile-burger-button {
+  display: none;
+}
+
+.burger__icon {
+  color: #FFF;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-self: center;
+  justify-self: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .mobile-burger-button {
+    display: block;
+    position: absolute;
+    right: 30px;
+    top: 15px;
+    cursor: pointer;
+    z-index: 3;
+  }
+  
+  .navigation-movies-page {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    right: -100%;
+    top: 0;
+    bottom: 0;
+    width: 68%;
+    height: 100vh;
+    background-color: #202020;
+    z-index: 2;
+    transition: left 1s;
+    margin-left: auto;
+    margin-right: 0;
+    padding-right: 0;
+  }
+
+  .navigation-movies-page_active {
+    right: 0;
+  }
+
+  .navigation__links {
+    display: flex;
+    flex-direction: column;
+    margin-top: 160px;
+    text-align: center;
+  }
+
+  .navigation__link {
+    margin-bottom: 28px;
+  }
+
+  .navigation__link_last {
+    margin-bottom: 0;
+  }
+
+  .navigation__link_mobile {
+    display: block;
+  }
+
+  .navigation__button_profile {
+    margin-bottom: 90px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .navigation__button {
+    font-size: 10px;
+  }
+
+  .navigation__button_signin {
+    min-height: 26px;
+    min-width: 54px;
+  }
+
+  .navigation__button_signup {
+    padding-right: 14px;
+  }
+}

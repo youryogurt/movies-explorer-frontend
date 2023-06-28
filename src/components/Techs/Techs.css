@@ -19,11 +19,11 @@
   align-self: center;
   font-style: normal;
   font-weight: 400;
-  font-size: 50px;
+  font-size: 46px;
   line-height: 58px;
   text-align: center;
   color: #FFFFFF;
-  margin: 90px auto 26px auto;
+  margin: 76px auto 26px auto;
 }
 
 .techs-description {
@@ -36,6 +36,7 @@
   color: #FFFFFF;
   margin: 0 auto 100px auto;
   align-self: center;
+  letter-spacing: -0.56px;
 }
 
 .techs-list {
@@ -75,9 +76,16 @@
     width: calc(100% - 2 * 50px);
   }
 
+  .techs-wrapper {
+    background-color: #202020;
+    ;
+  }
+
   .techs-description {
     font-size: 12px;
     line-height: 18px;
+    letter-spacing: -0.48px;
+    margin-bottom: 86px;
   }
 
   .techs-list {
@@ -97,17 +105,25 @@
 
   .techs-title {
     font-size: 30px;
+    margin-top: 55px;
+    margin-bottom: 14px;
+    letter-spacing: -1.2px;
   }
 
   .techs-description {
     font-size: 11px;
     line-height: 16px;
+    margin-bottom: 50px;
   }
 
   .techs-list {
     display: grid;
     grid-template-columns: repeat(2, 84px);
     gap: 10px;
-    padding-bottom: 0px;
+    padding-bottom: 74px;
+  }
+
+  .techs__section-title {
+    border-bottom: 1px solid #000000;
   }
 }

@@ -68,6 +68,10 @@
     width: calc(100% - 2 * 50px);
   }
 
+  .about-me__info  {
+    margin-top: 58px;
+  }
+
   .about-me__name {
     font-size: 40px;
   }
@@ -116,9 +120,10 @@
     margin-bottom: 40px;
   }
   .about-me__photo {
-    height: 352px;
+    min-height: 352px;
     width: 100%;
     margin-left: 0;
     margin-bottom: 40px;
+    margin-top: 26px;
   }
 }
