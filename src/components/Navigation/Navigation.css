@@ -1,8 +1,12 @@
 .navigation-start-page {
-  /* justify-self: flex-end; */
-  /* margin-right: 0;
-  margin-left: auto; */
-  /* justify-self: right; */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navigation {
+  width: 100%;
 }
 
 .navigation__button {
@@ -27,16 +31,11 @@
 }
 
 .navigation-movies-page {
-  /* justify-self: flex-start; */
-  border: 1px solid green;
-  padding-right: 30px;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   margin-left: 44px;
-  flex-grow: 1;
-  /* width: 100%; */
-  /* здесь самый правый элемент выпирает, нужно будет пофиксить ширину */
 }
 
 .navigation__button_films {
@@ -70,7 +69,7 @@
   color: #FFF;
   background: #313131;
   border-radius: 20px;
-  /* justify-self: flex-end; */
+  /* position: absolute; */
 }
 
 .navigation__link_mobile {
@@ -88,6 +87,16 @@
   display: flex;
   align-self: center;
   justify-self: center;
+}
+
+.navigation__links {
+  justify-self: flex-start;
+}
+
+.navigation__link_last {
+  /* justify-self: flex-end; */
+  /* position: absolute;
+  right: 70px; */
 }
 
 @media screen and (max-width: 1024px) {
@@ -147,7 +156,7 @@
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 520px) {
   .navigation__button {
     font-size: 10px;
   }
@@ -159,5 +168,10 @@
 
   .navigation__button_signup {
     padding-right: 14px;
+  }
+
+  .burger__icon {
+    width: 36px;
+    height: 36px;
   }
 }

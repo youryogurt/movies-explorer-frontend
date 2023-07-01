@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { ReactComponent as BurgerOpenButton } from "../../images/burger-icon.svg";
+import { ReactComponent as BurgerCloseButton } from "../../images/burger-close-icon.svg";
+// import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
 function Navigation() {
-  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(true);
   const location = useLocation();
 
   return (
@@ -24,7 +26,6 @@ function Navigation() {
       )}
 
       {location.pathname === "/movies" && (
-        // <div className="navigation-movies-page">
         <div
           className={
             isBurgerMenuOpen
@@ -60,10 +61,15 @@ function Navigation() {
               Аккаунт
             </button>
           </Link>
-          <div className="mobile-burger-button"
+          <div
+            className="mobile-burger-button"
             onClick={() => setIsBurgerMenuOpen(!isBurgerMenuOpen)}
           >
-            {isBurgerMenuOpen ? <AiOutlineClose className="burger__icon" /> : <AiOutlineMenu className="burger__icon" />}
+            {isBurgerMenuOpen ? (
+              <BurgerCloseButton className="burger__icon" />
+            ) : (
+              <BurgerOpenButton className="burger__icon" />
+            )}
           </div>
         </div>
       )}
