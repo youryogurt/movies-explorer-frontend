@@ -69,7 +69,6 @@
   color: #FFF;
   background: #313131;
   border-radius: 20px;
-  /* position: absolute; */
 }
 
 .navigation__link_mobile {
@@ -153,6 +152,7 @@
 
   .navigation__button_profile {
     margin-bottom: 90px;
+    margin-top: auto;
   }
 }
 

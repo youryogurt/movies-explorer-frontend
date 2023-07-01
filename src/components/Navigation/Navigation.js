@@ -5,7 +5,7 @@ import { ReactComponent as BurgerCloseButton } from "../../images/burger-close-i
 // import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
 function Navigation() {
-  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(true);
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const location = useLocation();
 
   return (
@@ -26,41 +26,43 @@ function Navigation() {
       )}
 
       {location.pathname === "/movies" && (
-        <div
-          className={
-            isBurgerMenuOpen
-              ? [
-                  "navigation-movies-page",
-                  "navigation-movies-page_active",
-                ].join(" ")
-              : "navigation-movies-page"
-          }
-        >
-          <div className="navigation__links">
-            <Link to="/" className="navigation__link navigation__link_mobile">
-              <button className="navigation__button navigation__button_films">
-                Главная
-              </button>
-            </Link>
-            <Link to="/movies" className="navigation__link">
-              <button className="navigation__button navigation__button_films">
-                Фильмы
-              </button>
-            </Link>
-            <Link to="/saved-movies" className="navigation__link">
-              <button className="navigation__button navigation__button_saved_films">
-                Сохранённые фильмы
+        <>
+          <div
+            className={
+              isBurgerMenuOpen
+                ? [
+                    "navigation-movies-page",
+                    "navigation-movies-page_active",
+                  ].join(" ")
+                : "navigation-movies-page"
+            }
+          >
+            <div className="navigation__links">
+              <Link to="/" className="navigation__link navigation__link_mobile">
+                <button className="navigation__button navigation__button_films">
+                  Главная
+                </button>
+              </Link>
+              <Link to="/movies" className="navigation__link">
+                <button className="navigation__button navigation__button_films">
+                  Фильмы
+                </button>
+              </Link>
+              <Link to="/saved-movies" className="navigation__link">
+                <button className="navigation__button navigation__button_saved_films">
+                  Сохранённые фильмы
+                </button>
+              </Link>
+            </div>
+            <Link
+              to="/profile"
+              className="navigation__link navigation__link_last"
+            >
+              <button className="navigation__button navigation__button_profile">
+                Аккаунт
               </button>
             </Link>
           </div>
-          <Link
-            to="/profile"
-            className="navigation__link navigation__link_last"
-          >
-            <button className="navigation__button navigation__button_profile">
-              Аккаунт
-            </button>
-          </Link>
           <div
             className="mobile-burger-button"
             onClick={() => setIsBurgerMenuOpen(!isBurgerMenuOpen)}
@@ -71,7 +73,7 @@ function Navigation() {
               <BurgerOpenButton className="burger__icon" />
             )}
           </div>
-        </div>
+        </>
       )}
 
       {location.pathname === "/saved-movies" && (
