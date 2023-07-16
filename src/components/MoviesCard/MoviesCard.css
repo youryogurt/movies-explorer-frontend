@@ -1,6 +1,4 @@
 .movies-card {
-  /* width: calc(100% - 2 * 70px); */
-  /* max-width: 364px; */
   height: auto;
   background-color: #222222;
   position: relative;
@@ -36,7 +34,7 @@
   margin: 0;
 }
 
-.movies-card__save-button {
+.movies-card__save-film-button {
   background-color: #313131;
   border-radius: 50%;
   width: 30px;
@@ -48,6 +46,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url(../../images/save-button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px;
+}
+
+.movies-card__unsave-film-button {
+  background-color: #3DDC84;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: all .5s;
+  padding: 0;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(../../images/saved-film-icon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px;
 }
 
 .movies-card__image {

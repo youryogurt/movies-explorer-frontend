@@ -22,10 +22,6 @@
   height: 38px;
 }
 
-/* .logo__routes{
-  padding-left: 0;
-} */
-
 @media screen and (max-width: 1024px) {
   .header {
     width: calc(100% - 2 * 30px);

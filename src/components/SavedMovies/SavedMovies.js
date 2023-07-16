@@ -3,8 +3,8 @@ import SearchForm from '../SearchForm/SearchForm';
 // import MoviesCard from "../Movies/Movies"
 import { ReactComponent as RemoveButtonIcon } from '../../images/remove-button.svg';
 
-
 function SavedMovies() {
+
   return (
     <div>
       <SearchForm/>

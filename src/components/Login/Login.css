@@ -8,6 +8,8 @@
   display: flex;
   flex-direction: column;
   margin-top: 40px;
+  height: auto;
+  /* height: 100vh; */
 }
 
 .form__title {
@@ -46,10 +48,6 @@
 
 }
 
-/* .form__input:not(:last-child) {
-  margin-bottom: 24px;
-} */
-
 .form__input_last {
   margin-bottom: 0;
 }
@@ -68,6 +66,7 @@
   border: none;
   border-radius: 3px;
   margin-top: 240px;
+  /* margin-top: auto; */
 }
 
 .form__question {
@@ -78,6 +77,8 @@
   font-size: 14px;
   line-height: 17px;
   color: #8B8B8B;
+  /* margin-top: auto; */
+  /* margin-bottom: 70px; */
 }
 
 .form__link {

@@ -1,12 +1,11 @@
 import React from "react";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
-import Navigation from "../Navigation/Navigation";
 
-function Header() {
+function SimpleHeader() {
 
   return (
-    <header className="header">
+    <header className="simple-header">
       <Link to="/">
         <img
           className="logo"
@@ -14,9 +13,8 @@ function Header() {
           alt="Белый смайлик с улыбкой без глаз в зеленом квадрате с закругленными краями"
         />
       </Link>
-      <Navigation />
     </header>
   );
 }
 
-export default Header;
+export default SimpleHeader;

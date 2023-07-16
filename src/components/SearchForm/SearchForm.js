@@ -9,16 +9,16 @@ function SearchForm() {
       <img className="search-form__icon" alt="Лупа" src={search} />
       <form className="search-form">
         <input
-            type="text"
-            placeholder="Фильм"
-            className="search-input"
-        />
+             type="text"
+             placeholder="Фильм"
+             className="search-input"
+         />
         <button className="search-form__button">
-          <SearchButtonIcon className="search-button-icon" />
-        </button>
-      </form>
-      <div className="search-form__vertical-line"></div>
-      <FilterCheckbox/>
+           <SearchButtonIcon className="search-button-icon" />
+         </button>
+       </form>
+       <div className="search-form__vertical-line"></div>
+       <FilterCheckbox/>
     </section>
   )
 }
