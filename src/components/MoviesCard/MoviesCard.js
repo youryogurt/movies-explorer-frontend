@@ -19,7 +19,7 @@ function MoviesCard() {
           <button type="button" className="movies-card__save-film-button" onClick={() => setIsSaved(!isSaved)}></button>
         )}
       </div>
-      <img className="movies-card__image" alt="описание карточки" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"/>
+      <img className="movies-card__image" alt="Обложка фильма" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"/>
     </div>
   )
 }

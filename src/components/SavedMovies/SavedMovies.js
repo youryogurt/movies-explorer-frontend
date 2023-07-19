@@ -1,8 +1,6 @@
 import React from "react";
 import SearchForm from '../SearchForm/SearchForm';
 // import MoviesCard from "../Movies/Movies"
-import { ReactComponent as RemoveButtonIcon } from '../../images/remove-button.svg';
-
 function SavedMovies() {
 
   return (
@@ -15,11 +13,9 @@ function SavedMovies() {
             <h4 className="movies-card__name">33 слова о дизайне</h4>
             <p className="movies-card__duration">1ч 47м</p>
           </div>
-          <button className="movies-card__save-button">
-            <RemoveButtonIcon/>
-          </button>
+          <button className="movies-card__delete-film-button"></button>
         </div>
-        <img className="movies-card__image" alt="описание карточки" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"/>
+        <img className="movies-card__image" alt="Обложка фильма" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"/>
       </div>
       
       <div className="movies-card">
@@ -28,11 +24,9 @@ function SavedMovies() {
             <h4 className="movies-card__name">33 слова о дизайне</h4>
             <p className="movies-card__duration">1ч 47м</p>
           </div>
-          <button className="movies-card__save-button">
-            <RemoveButtonIcon/>
-          </button>
+          <button className="movies-card__delete-film-button"></button>
         </div>
-        <img className="movies-card__image" alt="описание карточки" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"/>
+        <img className="movies-card__image" alt="Обложка фильма" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"/>
       </div>
 
       <div className="movies-card">
@@ -41,11 +35,9 @@ function SavedMovies() {
             <h4 className="movies-card__name">33 слова о дизайне</h4>
             <p className="movies-card__duration">1ч 47м</p>
           </div>
-          <button className="movies-card__save-button">
-            <RemoveButtonIcon/>
-          </button>
+          <button className="movies-card__delete-film-button"></button>
         </div>
-        <img className="movies-card__image" alt="описание карточки" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"/>
+        <img className="movies-card__image" alt="Обложка фильма" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"/>
       </div>
 
         {/* <MoviesCard/> */}

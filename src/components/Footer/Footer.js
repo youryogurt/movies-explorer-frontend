@@ -9,8 +9,8 @@ const currentYear = new Date().getFullYear();
       <div className="footer__bottom">
         <p className="footer__text footer__link-text footer__year">&copy; {currentYear}</p>
         <div className="footer__links">
-          <a className="footer__text footer__link-text" href="https://praktikum.yandex.ru/">Яндекс.Практикум</a>
-          <a className="footer__text footer__link-text" href="https://github.com/youryogurt">Github</a>
+          <a className="footer__text footer__link-text" href="https://praktikum.yandex.ru/" target="_blank" rel="noopener noreferrer">Яндекс.Практикум</a>
+          <a className="footer__text footer__link-text" href="https://github.com/youryogurt" target="_blank" rel="noopener noreferrer">Github</a>
       </div>
     </div>
   </footer>

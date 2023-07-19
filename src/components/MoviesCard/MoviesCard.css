@@ -35,7 +35,7 @@
 }
 
 .movies-card__save-film-button {
-  background-color: #313131;
+  background-color: #484141;
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -65,6 +65,24 @@
   align-items: center;
   justify-content: center;
   background-image: url(../../images/saved-film-icon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px;
+}
+
+.movies-card__delete-film-button {
+  background-color: #313131;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: all .5s;
+  padding: 0;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(../../images/remove-button.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 10px;

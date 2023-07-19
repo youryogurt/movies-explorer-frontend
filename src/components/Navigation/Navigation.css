@@ -92,12 +92,6 @@
   justify-self: flex-start;
 }
 
-.navigation__link_last {
-  /* justify-self: flex-end; */
-  /* position: absolute;
-  right: 70px; */
-}
-
 @media screen and (max-width: 1024px) {
   .mobile-burger-button {
     display: block;
@@ -129,7 +123,7 @@
 
   .navigation-movies-page_active {
     right: 0;
-    box-shadow: -400px 0 0 0 rgba(0, 0, 0, 0.3);
+    box-shadow: -300px 0 0 0 rgba(0, 0, 0, 0.3);
   }
 
   .navigation__links {
@@ -158,6 +152,10 @@
 
   .navigation__button {
     padding: 0;
+  }
+
+  .navigation__button_signup {
+    padding-right: 24px;
   }
 
   .navigation__button_selected{
