@@ -4,7 +4,7 @@ import SearchForm from '../SearchForm/SearchForm';
 function SavedMovies() {
 
   return (
-    <div>
+    <div className="saved-movies__section">
       <SearchForm/>
       <section className="movies-card-list">
       <div className="movies-card">

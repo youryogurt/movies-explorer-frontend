@@ -20,8 +20,6 @@
   padding-bottom: 150px;
   max-width: 730px;
   margin: 0 auto;
-  /* margin-left: auto;
-  margin-right: auto; */
   padding-top: 180px;
   padding-bottom: 150px;
 }
@@ -30,7 +28,6 @@
   .promo__container {
     width: calc(100% - 2 * 20px);
     max-width: 1024px;
-    margin-top: 38px;
   }
 
   .promo__title {
@@ -45,12 +42,13 @@
   .promo__container {
     width: calc(100% - 2 * 14px);
     max-width: 346px;
+    margin-top: 26px;
   }
 
   .promo__title {
     font-size: 28px;
     line-height: 37px;
-    padding-top: 210px;
+    padding-top: 226px;
     padding-bottom: 210px;
     letter-spacing: -0.8px;
   }

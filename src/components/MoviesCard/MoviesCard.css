@@ -35,7 +35,7 @@
 }
 
 .movies-card__save-film-button {
-  background-color: #484141;
+  background-color: #313131;
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -94,4 +94,10 @@
   object-position: center;
   display: block;
   max-height: 203px;
+}
+
+@media screen and (max-width: 520px) {
+  .movies-card__image {
+    max-height: 168px;
+  }
 }

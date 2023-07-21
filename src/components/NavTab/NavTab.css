@@ -29,13 +29,6 @@
   margin-right: 10px;
 }
 
-@media screen and (max-width: 1024px) {
-  /* .nav-tab__link {
-    width: 96px;
-    height: 36px;
-  } */
-}
-
 @media screen and (max-width: 520px) {
   .nav-tab {
     padding-bottom: 16px;
@@ -43,7 +36,7 @@
 
   .nav-tab__link {
     width: 82px;
-    height: 26px;
+    min-height: 26px;
     font-size: 10px;
   }
 
