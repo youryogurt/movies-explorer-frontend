@@ -9,25 +9,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10;
+  border-radius: 5px;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
   color: #FFFFFF;
   cursor: pointer;
+  padding: 0;
 }
 
-@media screen and (max-width: 520px) {
+.more-button:hover {
+  opacity: 0.7;
+  transition: all .5s;
+}
+
+@media screen and (max-width: 560px) {
   .more-button { 
     width: 240px;
     margin-top: 80px;
     margin-bottom: 160px;
-  }
-}
-
-@media screen and (max-width: 520px) {
-  .more-button { 
-    width: 240px;
   }
 }

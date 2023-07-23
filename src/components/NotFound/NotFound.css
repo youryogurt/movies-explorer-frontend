@@ -43,7 +43,7 @@
   color: #4285F4;
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 6) {
   .not-found__header {
     font-size: 80px;
     line-height: normal;

@@ -29,7 +29,7 @@
   margin-right: 10px;
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 560px) {
   .nav-tab {
     padding-bottom: 16px;
   }

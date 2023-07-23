@@ -1,6 +1,5 @@
 import React from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-import { ReactComponent as SearchButtonIcon } from "../../images/search-arrow.svg";
 import search from "../../images/search-icon.svg";
 
 function SearchForm() {
@@ -8,12 +7,10 @@ function SearchForm() {
     <section className="search-form__section">
       <div className="search-form">
         <img className="search-form__icon" alt="Лупа" src={search} />
-        <div className="search-form__container">
-          <input type="text" placeholder="Фильм" className="search-input" />
+        <form className="search-form__container">
+          <input type="text" placeholder="Фильм" className="search-input" required />
           <div className="search-form__items">
-            <button type="submit" className="search-form__button">
-              <SearchButtonIcon />
-            </button>
+            <button type="submit" className="search-form__button"></button>
             <div className="search-form__line"></div>
             <FilterCheckbox
               className="search-form__checkbox"
@@ -22,11 +19,9 @@ function SearchForm() {
           </div>
 
           <div className="search-form__items_mobile">
-            <button type="submit" className="search-form__button">
-              <SearchButtonIcon />
-            </button>
+            <button type="submit" className="search-form__button"></button>
           </div>
-        </div>
+        </form>
       </div>
       <div className="search-form__mobile-checkbox">
         <FilterCheckbox

@@ -1,5 +1,5 @@
-import React from 'react';
-import photo from '../../images/my-photo.jpg';
+import React from "react";
+import photo from "../../images/my-photo.jpg";
 
 function AboutMe() {
   return (
@@ -9,13 +9,30 @@ function AboutMe() {
         <div className="about-me__text">
           <h2 className="about-me__name">Жанна</h2>
           <p className="about-me__job">Фронтенд-разработчик, 23 года</p>
-          <p className="about-me__description">Я родилась в Москве, 2 года назад решила улететь без обратного билета в Грузию и с того момента путешествую. Через год после начала путешествий взяла из приюта собаку Мабаку, теперь мы везде вдвоем. В процессе прохождения курса по веб-разработке нашла работу на позиции верстальщика.</p>
-          <a className="about-me__github" href="https://github.com/youryogurt" target="_blank" rel="noopener noreferrer">Github</a>
+          <p className="about-me__description">
+            Я родилась в Москве, 2 года назад решила улететь без обратного
+            билета в Грузию и с того момента путешествую. Через год после начала
+            путешествий взяла из приюта собаку Мабаку, теперь мы везде вдвоем. В
+            процессе прохождения курса по веб-разработке нашла работу на позиции
+            верстальщика.
+          </p>
+          <a
+            className="about-me__github"
+            href="https://github.com/youryogurt"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Github
+          </a>
         </div>
-        <img className="about-me__photo" alt="Девушка в желтой куртке с каре" src={photo} />
+        <img
+          className="about-me__photo"
+          alt="Девушка в желтой куртке с каре"
+          src={photo}
+        />
       </div>
     </section>
-  )
+  );
 }
 
 export default AboutMe;

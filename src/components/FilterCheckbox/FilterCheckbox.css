@@ -50,7 +50,7 @@
   padding-left: 14px;
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 560px) {
   .filter-checkbox {
     align-self: center;
     margin: 40px auto 0 auto;

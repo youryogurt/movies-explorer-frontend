@@ -56,6 +56,10 @@
   font-size: 30px;
   line-height: 60px;
   color: #FFFFFF;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 @media screen and (max-width: 1024px) {
@@ -77,7 +81,7 @@
   }
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 560px) {
   .portfolio {
     width: calc(100% - 2 * 14px);
   }

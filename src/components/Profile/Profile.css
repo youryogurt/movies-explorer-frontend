@@ -85,9 +85,13 @@
   border: none;
   cursor: pointer;
   margin-top: 200px;
-  /* margin-top: auto; */
   margin-bottom: 16px;
   text-decoration: none;
+}
+
+.profile__button:hover {
+  opacity: 0.7;
+  transition: all .5s;
 }
 
 .profile__link {
@@ -100,13 +104,7 @@
   margin-bottom: 16px;
 }
 
-@media screen and (max-width: 1024px) {
-  .profile__section{ 
-    /* margin-top: 236px; */
-  }
-}
-
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 560px) {
   .profile__section { 
     max-width: calc(100% - 2 * 30px);
   }

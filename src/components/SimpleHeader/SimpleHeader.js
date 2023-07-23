@@ -3,7 +3,6 @@ import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 
 function SimpleHeader() {
-
   return (
     <header className="simple-header">
       <Link to="/">

@@ -93,7 +93,7 @@
   }
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 560px) {
   .about-me  {
     width: calc(100% - 2 * 14px);
   }

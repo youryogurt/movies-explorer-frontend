@@ -38,7 +38,7 @@
   }
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 560px) {
   .promo__container {
     width: calc(100% - 2 * 14px);
     max-width: 346px;

@@ -98,7 +98,7 @@
   }
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 560px) {
   .techs {
     width: calc(100% - 2 * 18px);
   }

@@ -157,24 +157,6 @@ function Navigation() {
                 : "navigation-movies-page"
             }
           >
-            {/* <div>
-              <Link to="/movies" className="navigation__link">
-                <button className="navigation__button navigation__button_films">
-                  Фильмы
-                </button>
-              </Link>
-              <Link to="/saved-movies" className="navigation__link">
-                <button className="navigation__button navigation__button_saved_films">
-                  Сохранённые фильмы
-                </button>
-              </Link>
-            </div>
-            <Link to="/profile" className="navigation__link">
-              <button className="navigation__button navigation__button_profile">
-                Аккаунт
-              </button>
-            </Link>
-          </div> */}
             <div className="navigation__links">
               <Link to="/" className="navigation__link navigation__link_mobile">
                 <button className="navigation__button navigation__button_films">
