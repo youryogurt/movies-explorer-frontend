@@ -1,0 +1,11 @@
+.app {
+  margin: 0 auto;
+  font-family: 'Inter', Arial, sans-serif;
+  min-height: 100vh;
+  background-color: #202020;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+

@@ -1,0 +1,129 @@
+
+.techs-wrapper {
+  width: 100%;
+  background-color: #272727;
+  align-self: center;
+  margin: 0 auto;
+}
+
+.techs {
+  width: calc(100% - 2 * 70px);
+  max-width: 1140px;
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+}
+
+.techs-title {
+  align-self: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 58px;
+  text-align: center;
+  color: #FFFFFF;
+  margin: 76px auto 26px auto;
+}
+
+.techs-description {
+  max-width: 460px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: #FFFFFF;
+  margin: 0 auto 100px auto;
+  align-self: center;
+  letter-spacing: -0.56px;
+}
+
+.techs-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-bottom: 100px;
+  padding-left: 0;
+  margin: 0;
+}
+
+.techs-list-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #303030;
+  color: #FFFFFF;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+  align-items: center;
+  border: none;
+  padding: 10 auto;
+  width: 90px;
+  min-height: 60px;
+  list-style: none;
+}
+
+.techs-list-element:not(:last-child) {
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+  .techs {
+    width: calc(100% - 2 * 50px);
+  }
+
+  .techs-wrapper {
+    background-color: #202020;
+    ;
+  }
+
+  .techs-description {
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.48px;
+    margin-bottom: 86px;
+  }
+
+  .techs-list {
+    padding-bottom: 90px;
+  }
+
+  .techs-list-element {
+    width: 84px;
+    min-height: 57px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .techs {
+    width: calc(100% - 2 * 18px);
+  }
+
+  .techs-title {
+    font-size: 30px;
+    margin-top: 44px;
+    margin-bottom: 14px;
+    letter-spacing: -1.2px;
+  }
+
+  .techs-description {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 50px;
+  }
+
+  .techs-list {
+    display: grid;
+    grid-template-columns: repeat(2, 84px);
+    gap: 10px;
+    padding-bottom: 74px;
+  }
+
+  .techs__section-title {
+    border-bottom: 1px solid #000000;
+  }
+}
