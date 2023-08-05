@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import search from "../../images/search-icon.svg";
 
 function SearchForm() {
+  // const [isKeywordValid, setIsKeywordValid] = useState(false);
+
+  // const handleKeywordChange = (e) => {
+  //   if (e.target.validity.valid) {  
+  //     setIsKeywordValid(true);
+  //   } else {
+  //     setIsKeywordValid(false);
+  //   }
+  // };
+
   return (
     <section className="search-form__section">
       <div className="search-form">

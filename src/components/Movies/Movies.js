@@ -9,7 +9,7 @@ function Movie() {
     <div>
       <SearchForm />
       <MoviesCardList />
-      <button className="more-button">Ещё</button>
+      {/* <button className="more-button">Ещё</button> */}
     </div>
   );
 }

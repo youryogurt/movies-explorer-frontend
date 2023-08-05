@@ -11,6 +11,16 @@
   align-items: center;
 }
 
+.simple-header {
+  max-width: 396px;
+  width: 100%;
+  padding-top: 80px;
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 38px;
+}
+
 .header__auth {
   max-width: 396px;
   margin-left: auto;
@@ -31,5 +41,12 @@
 @media screen and (max-width: 560px) {
   .header {
     width: calc(100% - 2 * 14px);
+  }
+
+  .simple-header {
+    display: flex;
+    justify-content: center;
+    padding-top: 56px;
+    padding-bottom: 10px;  
   }
 }

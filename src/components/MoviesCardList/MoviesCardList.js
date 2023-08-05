@@ -1,326 +1,81 @@
-import React, { useState } from "react";
-// import MoviesCard from "../Movies/Movies"
+import React, { useEffect, useState } from "react";
+import MoviesCard from "../MoviesCard/MoviesCard";
+import Preloader from "../Preloader/Preloader";
 
-function MoviesCardList() {
+import {
+  SCREEN_L,
+  SCREEN_M,
+  SCREEN_S,
+  MOVIES_PER_PAGE_L,
+  MOVIES_PER_PAGE_M,
+  MOVIES_PER_PAGE_S,
+} from "../../utils/constants";
+
+function MoviesCardList(props) {
   const [isSaved, setIsSaved] = useState(false);
 
-  return (
-    <section className="movies-card-list">
-      {/* <MoviesCard/> */}
-      <div className="movies-card">
-        <div className="movies-card__info">
-          <div className="movies-card__text">
-            <h4 className="movies-card__name">33 слова о дизайне</h4>
-            <p className="movies-card__duration">1ч 47м</p>
-          </div>
-          {isSaved ? (
-            <button
-              type="button"
-              className="movies-card__unsave-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          ) : (
-            <button
-              type="button"
-              className="movies-card__save-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          )}
-        </div>
-        <img
-          className="movies-card__image"
-          alt="Обложка фильма"
-          src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-        />
-      </div>
+  const [shownMovies, setShownMovies] = useState(0);
 
-      <div className="movies-card">
-        <div className="movies-card__info">
-          <div className="movies-card__text">
-            <h4 className="movies-card__name">33 слова о дизайне</h4>
-            <p className="movies-card__duration">1ч 47м</p>
-          </div>
-          {isSaved ? (
+  function getShownMovies() {
+    if (window.innerWidth >= SCREEN_L) {
+      return MOVIES_PER_PAGE_L;
+    } else if (window.innerWidth >= SCREEN_M) {
+      return MOVIES_PER_PAGE_M;
+    } else if (window.innerWidth >= SCREEN_S) {
+      return MOVIES_PER_PAGE_S;
+    }
+  }
+
+  function handleShowMore() {
+    if (window.innerWidth >= SCREEN_L) {
+      setShownMovies(shownMovies + 4);
+    } else if (window.innerWidth >= SCREEN_M) {
+      setShownMovies(shownMovies + 2);
+    } else if (window.innerWidth >= SCREEN_S) {
+      setShownMovies(shownMovies + 2);
+    }
+  }
+
+  useEffect(() => {
+    getShownMovies();
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      window.addEventListener("resize", getShownMovies);
+    }, 1000);
+  });
+
+  return (
+    <section className="movies-card-list-section">
+      {props.isLoading && <Preloader />}
+      {props.isNotFoundError && <p className="movies-card-list__error">Ничего не найдено</p>}
+      {props.isQueryError && <p className="movies-card-list__error">Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз</p>}
+      {!props.isLoading && !props.isNotFoundError && !props.isQueryError && (
+        <>
+          <ul className="movies-card-list">
+            {props.movies.slice(0, shownMovies).map((movie) => (
+              <MoviesCard
+                key={movie.id}
+                card={movie}
+                onCardClick={props.onCardClick}
+                onCardSave={props.onCardSave}
+                isSaved={isSaved}
+                setIsSaved={setIsSaved}
+              />
+            ))}
+          </ul>
+          {props.movies.length > shownMovies && (
             <button
+              className="more-button"
               type="button"
-              className="movies-card__unsave-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          ) : (
-            <button
-              type="button"
-              className="movies-card__save-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
+              onClick={handleShowMore}
+            >
+              Ещё
+            </button>
           )}
-        </div>
-        <img
-          className="movies-card__image"
-          alt="Обложка фильма"
-          src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-        />
-      </div>
-      <div className="movies-card">
-        <div className="movies-card__info">
-          <div className="movies-card__text">
-            <h4 className="movies-card__name">33 слова о дизайне</h4>
-            <p className="movies-card__duration">1ч 47м</p>
-          </div>
-          {isSaved ? (
-            <button
-              type="button"
-              className="movies-card__unsave-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          ) : (
-            <button
-              type="button"
-              className="movies-card__save-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          )}
-        </div>
-        <img
-          className="movies-card__image"
-          alt="Обложка фильма"
-          src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-        />
-      </div>
-      <div className="movies-card">
-        <div className="movies-card__info">
-          <div className="movies-card__text">
-            <h4 className="movies-card__name">33 слова о дизайне</h4>
-            <p className="movies-card__duration">1ч 47м</p>
-          </div>
-          {isSaved ? (
-            <button
-              type="button"
-              className="movies-card__unsave-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          ) : (
-            <button
-              type="button"
-              className="movies-card__save-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          )}
-        </div>
-        <img
-          className="movies-card__image"
-          alt="Обложка фильма"
-          src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-        />
-      </div>
-      <div className="movies-card">
-        <div className="movies-card__info">
-          <div className="movies-card__text">
-            <h4 className="movies-card__name">33 слова о дизайне</h4>
-            <p className="movies-card__duration">1ч 47м</p>
-          </div>
-          {isSaved ? (
-            <button
-              type="button"
-              className="movies-card__unsave-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          ) : (
-            <button
-              type="button"
-              className="movies-card__save-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          )}
-        </div>
-        <img
-          className="movies-card__image"
-          alt="Обложка фильма"
-          src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-        />
-      </div>
-      <div className="movies-card">
-        <div className="movies-card__info">
-          <div className="movies-card__text">
-            <h4 className="movies-card__name">33 слова о дизайне</h4>
-            <p className="movies-card__duration">1ч 47м</p>
-          </div>
-          {isSaved ? (
-            <button
-              type="button"
-              className="movies-card__unsave-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          ) : (
-            <button
-              type="button"
-              className="movies-card__save-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          )}
-        </div>
-        <img
-          className="movies-card__image"
-          alt="Обложка фильма"
-          src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-        />
-      </div>
-      <div className="movies-card">
-        <div className="movies-card__info">
-          <div className="movies-card__text">
-            <h4 className="movies-card__name">33 слова о дизайне</h4>
-            <p className="movies-card__duration">1ч 47м</p>
-          </div>
-          {isSaved ? (
-            <button
-              type="button"
-              className="movies-card__unsave-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          ) : (
-            <button
-              type="button"
-              className="movies-card__save-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          )}
-        </div>
-        <img
-          className="movies-card__image"
-          alt="Обложка фильма"
-          src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-        />
-      </div>
-      <div className="movies-card">
-        <div className="movies-card__info">
-          <div className="movies-card__text">
-            <h4 className="movies-card__name">33 слова о дизайне</h4>
-            <p className="movies-card__duration">1ч 47м</p>
-          </div>
-          {isSaved ? (
-            <button
-              type="button"
-              className="movies-card__unsave-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          ) : (
-            <button
-              type="button"
-              className="movies-card__save-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          )}
-        </div>
-        <img
-          className="movies-card__image"
-          alt="Обложка фильма"
-          src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-        />
-      </div>
-      <div className="movies-card">
-        <div className="movies-card__info">
-          <div className="movies-card__text">
-            <h4 className="movies-card__name">33 слова о дизайне</h4>
-            <p className="movies-card__duration">1ч 47м</p>
-          </div>
-          {isSaved ? (
-            <button
-              type="button"
-              className="movies-card__unsave-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          ) : (
-            <button
-              type="button"
-              className="movies-card__save-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          )}
-        </div>
-        <img
-          className="movies-card__image"
-          alt="Обложка фильма"
-          src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-        />
-      </div>
-      <div className="movies-card">
-        <div className="movies-card__info">
-          <div className="movies-card__text">
-            <h4 className="movies-card__name">33 слова о дизайне</h4>
-            <p className="movies-card__duration">1ч 47м</p>
-          </div>
-          {isSaved ? (
-            <button
-              type="button"
-              className="movies-card__unsave-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          ) : (
-            <button
-              type="button"
-              className="movies-card__save-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          )}
-        </div>
-        <img
-          className="movies-card__image"
-          alt="Обложка фильма"
-          src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-        />
-      </div>
-      <div className="movies-card">
-        <div className="movies-card__info">
-          <div className="movies-card__text">
-            <h4 className="movies-card__name">33 слова о дизайне</h4>
-            <p className="movies-card__duration">1ч 47м</p>
-          </div>
-          {isSaved ? (
-            <button
-              type="button"
-              className="movies-card__unsave-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          ) : (
-            <button
-              type="button"
-              className="movies-card__save-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          )}
-        </div>
-        <img
-          className="movies-card__image"
-          alt="Обложка фильма"
-          src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-        />
-      </div>
-      <div className="movies-card">
-        <div className="movies-card__info">
-          <div className="movies-card__text">
-            <h4 className="movies-card__name">33 слова о дизайне</h4>
-            <p className="movies-card__duration">1ч 47м</p>
-          </div>
-          {isSaved ? (
-            <button
-              type="button"
-              className="movies-card__unsave-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          ) : (
-            <button
-              type="button"
-              className="movies-card__save-film-button"
-              onClick={() => setIsSaved(!isSaved)}
-            ></button>
-          )}
-        </div>
-        <img
-          className="movies-card__image"
-          alt="Обложка фильма"
-          src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-        />
-      </div>
-      {/* <MoviesCard/> */}
+        </>
+      )}
     </section>
   );
 }
