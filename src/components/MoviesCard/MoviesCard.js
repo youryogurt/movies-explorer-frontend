@@ -36,8 +36,8 @@ function MoviesCard(props) {
     <div className="movies-card">
       <div className="movies-card__info">
         <div className="movies-card__text">
-          <h4 className="movies-card__name">{props.card.name.nameRU}</h4>
-          <p className="movies-card__duration">{convertDuration(props.card.duration)}</p>
+          <h4 className="movies-card__name">{props.movie.nameRU}</h4>
+          <p className="movies-card__duration">{convertDuration(props.movie.duration)}</p>
         </div>
         <button
           className={`${cardSaveButtonClassName}`}
@@ -60,8 +60,8 @@ function MoviesCard(props) {
       </div>
       <img
         className="movies-card__image"
-        src={`https://api.nomoreparties.co${props.card.image.url}`}
-        alt={props.card.nameRU}
+        src={`https://api.nomoreparties.co${props.movie.image.url}`}
+        alt={props.movie.nameRU}
         onClick={openTrailer}
       />
     </div>

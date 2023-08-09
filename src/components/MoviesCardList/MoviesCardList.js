@@ -28,7 +28,7 @@ function MoviesCardList(props) {
 
   function handleShowMore() {
     if (window.innerWidth >= SCREEN_L) {
-      setShownMovies(shownMovies + 4);
+      setShownMovies(shownMovies + 3);
     } else if (window.innerWidth >= SCREEN_M) {
       setShownMovies(shownMovies + 2);
     } else if (window.innerWidth >= SCREEN_S) {
@@ -46,8 +46,13 @@ function MoviesCardList(props) {
     }, 1000);
   });
 
-  function getSavedMovies(savedMovies, movie) {
-    return savedMovies.find((savedMovie) => savedMovie.movieId === movie.id);
+  // function getSavedMovies(savedMovies, movie) {
+  //   return savedMovies.find((savedMovie) => savedMovie.movieId === movie.id);
+  // }
+  
+  // просто функция-пустышка пока что
+  function getSavedMovies() {
+    console.log('hi');
   }
 
   return (
@@ -61,7 +66,8 @@ function MoviesCardList(props) {
             {props.movies.slice(0, shownMovies).map((movie) => (
               <MoviesCard
                 key={props.isSavedFilms ? movie._id : movie.id}
-                card={movie}
+                movie={movie}
+                savedMovies={props.savedMovies}
                 onCardClick={props.onCardClick}
                 onCardSave={props.onCardSave}
                 isSaved={isSaved}

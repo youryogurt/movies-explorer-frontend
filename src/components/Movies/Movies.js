@@ -2,12 +2,28 @@ import React, { useState, useEffect } from "react";
 
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import { getMovies } from "../../utils/MoviesApi.js";
 
 function Movies(props) {
   const [foundMovies, setFoundMovies] = useState([]); // массив найденных фильмов по запросу
   const [isCheckbox, setIsCheckbox] = useState(false); // состояние чекбокса короткометражек
   const [filteredMovies, setFilteredMovies] = useState([]); // фильмы, полученные в результате фильтрации (чекбокс)
   const [isNotFoundError, setIsNotFoundError] = useState(false); // ошибка поиска, когда по запросу ничего не найдено
+ 
+  // получение списка фильмов
+  function getMoviesList() {
+    getMovies()
+      .then((res) => {
+        setFoundMovies(res);
+        setFilteredMovies(res);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const movies = getMoviesList();
 
   // фильтрация фильмов (короткометражки)
   function filterShortMovies(movies) {
@@ -58,11 +74,8 @@ function Movies(props) {
   function handleSubmit(query) {
     localStorage.setItem('query', query);
     localStorage.setItem('shortfilms', isCheckbox);
-
-    const movies = JSON.parse(localStorage.getItem('initialMovies'));
-    handleFilterMovies(movies, query, isCheckbox);
     
-    console.log('hi');
+    handleFilterMovies(props.movies, query, isCheckbox);
   }
 
   return (

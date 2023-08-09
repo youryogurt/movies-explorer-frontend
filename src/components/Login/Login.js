@@ -43,6 +43,7 @@ function Login(props) {
           name="password"
           type="password"
           value={values.password || ""}
+          minLength={8}
         />
         <span className="form__error">{errors.password}</span>
       </label>

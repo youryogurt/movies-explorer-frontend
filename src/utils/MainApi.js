@@ -1,4 +1,3 @@
-// import { handleResponse } from "./constants";
 import { BASE_URL } from "./constants";
 
 export class Api {
@@ -58,6 +57,11 @@ export class Api {
   }
 }
 
-const api = new Api(); // надо что-то передать в скобки?
+// вот это шляпа какая-то, скорее всего надо избавиться от этого
+const config = {
+  BASE_URL: 'https://api.movexplorer.yoryogurt.nomoredomains.rocks',
+};
+
+const api = new Api(config); // надо что-то передать в скобки?
 
 export default api;

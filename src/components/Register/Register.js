@@ -28,7 +28,7 @@ function Register(props) {
           required
           onChange={handleChange}
           id="name"
-          type="name"
+          type="text"
           name="name"
           value={values.name || ""}
         />
@@ -58,6 +58,7 @@ function Register(props) {
           type="password"
           name="password"
           value={values.password || ""}
+          minLength={8}
         />
         <span className="form__error">{errors.password}</span>
       </label>
