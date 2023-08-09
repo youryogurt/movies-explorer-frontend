@@ -14,7 +14,7 @@ import {
 function MoviesCardList(props) {
   const [isSaved, setIsSaved] = useState(false);
 
-  const [shownMovies, setShownMovies] = useState(0);
+  const [shownMovies, setShownMovies] = useState(12);
 
   function getShownMovies() {
     if (window.innerWidth >= SCREEN_L) {
@@ -46,6 +46,10 @@ function MoviesCardList(props) {
     }, 1000);
   });
 
+  function getSavedMovies(savedMovies, movie) {
+    return savedMovies.find((savedMovie) => savedMovie.movieId === movie.id);
+  }
+
   return (
     <section className="movies-card-list-section">
       {props.isLoading && <Preloader />}
@@ -56,12 +60,13 @@ function MoviesCardList(props) {
           <ul className="movies-card-list">
             {props.movies.slice(0, shownMovies).map((movie) => (
               <MoviesCard
-                key={movie.id}
+                key={props.isSavedFilms ? movie._id : movie.id}
                 card={movie}
                 onCardClick={props.onCardClick}
                 onCardSave={props.onCardSave}
                 isSaved={isSaved}
                 setIsSaved={setIsSaved}
+                saved={getSavedMovies(props.savedMovies, movie)}
               />
             ))}
           </ul>

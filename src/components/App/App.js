@@ -20,6 +20,7 @@ import * as AuthApi from '../../utils/Auth.js';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [movies, setMovies] = useState([]); // стейт для списка фильмов
   
   // прячем футер на страницах, где он не нужен
   const location = useLocation();
@@ -28,51 +29,44 @@ function App() {
 
   const navigate = useNavigate();
   
-  // обработчик регистрации
-  function handleRegister(name, email, password) {
-    if (!name || !email || !password) {
-      return;
-    }
-    AuthApi.register(name, email, password)
-      .then((res) => {
-        if (res) {
-          handleLogin(email, password);
+  // обработчик авторизации
+  function handleLogin(email, password) {
+    AuthApi.login(email, password)
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem('jwt', data.token);
+          setIsLoggedIn(true);
         }
+        navigate('/movies');
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-  // обработчик авторизации
-  function handleLogin(email, password) {
-    if (!email || !password) {
-      return;
-    }
-    AuthApi.login(email, password)
-      .then((data) => {
-        if (data.token) {
-          localStorage.setItem('jwt', data.token);
-          setIsLoggedIn(true);
-          navigate('/');
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  // обработчик регистрации
+  function handleRegister(name, email, password) {
+    AuthApi.register(name, email, password)
+    .then((res) => {
+      handleLogin(email, password);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
   // обработчик выхода
   function handleLogOut() {
     localStorage.removeItem('jwt');
     setIsLoggedIn(false);
-    navigate('/signin');
+    navigate('/');
   }
 
   // получение списка фильмов
   function getMoviesList() {
     getMovies()
       .then((res) => {
+        setMovies(res);
         console.log(res);
       })
       .catch((err) => {
@@ -90,17 +84,20 @@ function App() {
       <div className="app">
         <Header />
         <Routes>
-          <Route path="/movies" element={<ProtectedRoute
+          {/* закоммитила, чтобы удобнее было сначала разобраться*/}
+          <Route path="/movies" element={<Movies movies={movies} />} />
+          {/* <Route path="/movies" element={<ProtectedRoute
           element={Movies}
-          // loggedIn={isLoggedIn}
+          loggedIn={isLoggedIn}
           />} />
-          <Route path="/movies" element={isLoggedIn ? <Navigate to="/" replace /> : <Navigate to="/signin" replace />} />
-
-          <Route path="/saved-movies" element={<ProtectedRoute
+          <Route path="/movies" element={isLoggedIn ? <Navigate to="/" replace /> : <Navigate to="/signin" replace />} /> */}
+          {/* закоммитила, чтобы удобнее было сначала разобраться*/}
+          <Route path="/saved-movies" element={<SavedMovies/>} />
+          {/* <Route path="/saved-movies" element={<ProtectedRoute
           element={SavedMovies}
-          // loggedIn={isLoggedIn}
+          loggedIn={isLoggedIn}
           />} />
-          <Route path="/saved-movies" element={isLoggedIn ? <Navigate to="/" replace /> : <Navigate to="/signin" replace />} />
+          <Route path="/saved-movies" element={isLoggedIn ? <Navigate to="/" replace /> : <Navigate to="/signin" replace />} /> */}
           
           <Route path="/profile" element={<ProtectedRoute
           element={Profile}
@@ -108,19 +105,20 @@ function App() {
           />} />
           <Route path="/profile" element={isLoggedIn ? <Navigate to="/" replace /> : <Navigate to="/signin" replace />} />
           
-          <Route path="/profile" element={<ProtectedRoute
+          {/* скорее всего ненужная часть кода */}
+          {/* <Route path="/profile" element={<ProtectedRoute
           element={Edit}
-          // loggedIn={isLoggedIn}
+          loggedIn={isLoggedIn}
           />} />
-          <Route path="/edit" element={isLoggedIn ? <Navigate to="/" replace /> : <Navigate to="/signin" replace />} />
+          <Route path="/edit" element={isLoggedIn ? <Navigate to="/" replace /> : <Navigate to="/signin" replace />} /> */}
 
           {/* <Route path="/movies" element={<Movies/>} /> */}
           {/* <Route path="/saved-movies" element={<SavedMovies/>}/> */}
           {/* <Route path="/profile" element={<Profile/>}/> */}
           {/* <Route path="/edit" element={<Edit/>}/> */}
           <Route path="/" element={<Main/>} />
-          <Route path="/signin" element={<Login/>}/>
-          <Route path="/signup" element={<Register onRegister={handleRegister} />}/>
+          <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
+          <Route path="/signup" element={<Register handleRegister={handleRegister} />}/>
           <Route path="/*" element={<NotFound />}/>
         </Routes>
         {shouldShowFooter && <Footer />}

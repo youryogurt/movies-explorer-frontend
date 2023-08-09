@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 // import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
-function MoviesCard({ card, onCardClick, onCardSave }) {
+function MoviesCard(props) {
   // const currentUser = React.useContext(CurrentUserContext);
   const [isSaved, setIsSaved] = useState(false);
 
@@ -13,14 +13,14 @@ function MoviesCard({ card, onCardClick, onCardSave }) {
     isSaved && "movies-card__save-film-button"
   }`;
 
-  function handleCardClick() {
-    onCardClick(card);
-  }
+  // function handleCardClick() {
+  //   onCardClick(card);
+  // }
 
-  function handleSaveClick() {
-    onCardSave(card);
-    setIsSaved(!isSaved);
-  }
+  // function handleSaveClick() {
+  //   onCardSave(card);
+  //   setIsSaved(!isSaved);
+  // }
 
   function convertDuration(duration) {
     const hours = Math.floor(duration / 60);
@@ -29,20 +29,20 @@ function MoviesCard({ card, onCardClick, onCardSave }) {
   }
 
   function openTrailer() {
-    window.open(card.trailerLink, "_blank");
+    window.open(props.card.trailerLink, "_blank");
   }
 
   return (
     <div className="movies-card">
       <div className="movies-card__info">
         <div className="movies-card__text">
-          <h4 className="movies-card__name">{card.name.nameRU}</h4>
-          <p className="movies-card__duration">{convertDuration(card.duration)}</p>
+          <h4 className="movies-card__name">{props.card.name.nameRU}</h4>
+          <p className="movies-card__duration">{convertDuration(props.card.duration)}</p>
         </div>
         <button
           className={`${cardSaveButtonClassName}`}
           type="button"
-          onClick={handleSaveClick}
+          // onClick={handleSaveClick}
         ></button>
         {/* {isSaved ? (
           <button
@@ -60,8 +60,8 @@ function MoviesCard({ card, onCardClick, onCardSave }) {
       </div>
       <img
         className="movies-card__image"
-        src={`https://api.nomoreparties.co${card.image.url}`}
-        alt={card.nameRU}
+        src={`https://api.nomoreparties.co${props.card.image.url}`}
+        alt={props.card.nameRU}
         onClick={openTrailer}
       />
     </div>

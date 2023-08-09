@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import search from "../../images/search-icon.svg";
 
-function SearchForm() {
+function SearchForm(props) {
   // const [isKeywordValid, setIsKeywordValid] = useState(false);
 
   // const handleKeywordChange = (e) => {
@@ -13,11 +13,19 @@ function SearchForm() {
   //   }
   // };
 
+  // сабмит формы поиска
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.handleSubmit();
+    // props.onSearch(keyword);
+    // props.onSearch(keyword, isCheckbox);
+  }
+
   return (
     <section className="search-form__section">
       <div className="search-form">
         <img className="search-form__icon" alt="Лупа" src={search} />
-        <form className="search-form__container">
+        <form className="search-form__container" onSubmit={handleSubmit}>
           <input type="text" placeholder="Фильм" className="search-input" required />
           <div className="search-form__items">
             <button type="submit" className="search-form__button"></button>
