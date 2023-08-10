@@ -3,22 +3,16 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import search from "../../images/search-icon.svg";
 
 function SearchForm(props) {
-  // const [isKeywordValid, setIsKeywordValid] = useState(false);
-
-  // const handleKeywordChange = (e) => {
-  //   if (e.target.validity.valid) {  
-  //     setIsKeywordValid(true);
-  //   } else {
-  //     setIsKeywordValid(false);
-  //   }
-  // };
+  const [query, setQuery] = useState("");
+  
+  function handleChange(e) {
+    setQuery(e.target.value);
+  }
 
   // сабмит формы поиска
   function handleSubmit(e) {
     e.preventDefault();
     props.handleSubmit();
-    // props.onSearch(keyword);
-    // props.onSearch(keyword, isCheckbox);
   }
 
   return (
@@ -26,7 +20,7 @@ function SearchForm(props) {
       <div className="search-form">
         <img className="search-form__icon" alt="Лупа" src={search} />
         <form className="search-form__container" onSubmit={handleSubmit}>
-          <input type="text" placeholder="Фильм" className="search-input" required />
+          <input type="text" placeholder="Фильм" className="search-input" required handleChange={handleChange} />
           <div className="search-form__items">
             <button type="submit" className="search-form__button"></button>
             <div className="search-form__line"></div>

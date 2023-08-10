@@ -27,6 +27,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [movies, setMovies] = useState([]); // стейт для списка фильмов
+  const [userRequestDone, setUserRequestDone] = useState(true);
 
   // прячем футер на страницах, где он не нужен
   const location = useLocation();
@@ -74,11 +75,13 @@ function App() {
       .then((res) => {
         if (res) {
           setLoggedIn(true);
-          navigate('/movies');
         }
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setUserRequestDone(true);
       });
   }
 
@@ -130,21 +133,22 @@ function App() {
       <div className="app">
         <Header />
         <Routes>
-          {/* <Route
+          <Route
             path="/movies"
             element={
               <ProtectedRoute
                 element={Movies}
                 movies={movies}
                 loggedIn={loggedIn}
+                userRequestDone={userRequestDone}
               />
             }
-          /> */}
+          />
 
           <Route
             path="/saved-movies"
             element={
-              <ProtectedRoute element={SavedMovies} loggedIn={loggedIn} />
+              <ProtectedRoute element={SavedMovies} loggedIn={loggedIn} userRequestDone={userRequestDone} />
             }
           />
 
@@ -156,12 +160,11 @@ function App() {
                 loggedIn={loggedIn}
                 handleLogOut={handleLogOut}
                 handleUpdateUser={handleUpdateUser}
+                userRequestDone={userRequestDone}
               />
             }
           />
           
-          <Route path="/movies" element={<Movies movies={movies} />} />
-
           <Route path="/" element={<Main />} />
           <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
 
