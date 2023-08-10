@@ -1,38 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useValidation from "../../hooks/useFormValidation.js";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
 function Profile(props) {
+  const [isDisabled, setIsDisabled] = useState(true);
   const { values, handleChange, errors, isValid, resetForm } = useValidation({
     name: "",
     email: "",
   });
 
-  const currentUser = React.useContext(CurrentUserContext);
-  const [isNewValues, setIsNewValues] = useState(false);
+  const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
-    if (currentUser.name === values.name && currentUser.email === values.email) {
-      setIsNewValues(false);
-    } else {
-      setIsNewValues(true);
-    }
-  }, [currentUser.name, currentUser.email, values]);
-
-  useEffect(() => {
-    if (currentUser) {
-      resetForm(currentUser);
-    }
+    resetForm({ email: currentUser.email, name: currentUser.name });
   }, [currentUser, resetForm]);
+  
+  useEffect(() => {
+    let isActiveButton = (currentUser.name !== values.name) || (currentUser.email !== values.email);
+    setIsDisabled(isActiveButton);
+  }, [values, currentUser, isValid])
 
   function handleSubmit(e) {
     e.preventDefault();
     if (isValid) {
-      props.handleRegister(values.name, values.email);
+      props.handleUpdateUser(values.name, values.email);
     }
   }
-  
 
   return (
     <div className="profile__section">
@@ -69,7 +63,10 @@ function Profile(props) {
           <span className="form__error">{errors.email}</span>
         </label>
       </form>
-      <button className="profile__button">Редактировать</button>
+      <button
+        className={`profile__button ${!isValid && errors ? 'profile__button_disabled' : ''}`}
+        disabled={!isValid || !isDisabled}
+      >Редактировать</button>
       <Link className="profile__link" to="/">
         Выйти из аккаунта
       </Link>

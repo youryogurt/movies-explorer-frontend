@@ -11,19 +11,19 @@ function Movies(props) {
   const [isNotFoundError, setIsNotFoundError] = useState(false); // ошибка поиска, когда по запросу ничего не найдено
  
   // получение списка фильмов
-  function getMoviesList() {
-    getMovies()
-      .then((res) => {
-        setFoundMovies(res);
-        setFilteredMovies(res);
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+  // function getMoviesList() {
+  //   getMovies()
+  //     .then((res) => {
+  //       setFoundMovies(res);
+  //       setFilteredMovies(res);
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
 
-  const movies = getMoviesList();
+  // const movies = getMoviesList();
 
   // фильтрация фильмов (короткометражки)
   function filterShortMovies(movies) {

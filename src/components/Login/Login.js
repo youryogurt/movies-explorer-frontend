@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import useValidation from "../../hooks/useFormValidation.js";
 
 function Login(props) {
-  const { values, handleChange, errors, isValid } = useValidation({
+  const { values, handleChange, errors, isValid, resetForm } = useValidation({
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    resetForm({ email: "", password: "" });
+  }, [resetForm]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -47,7 +51,15 @@ function Login(props) {
         />
         <span className="form__error">{errors.password}</span>
       </label>
-      <button className="form__button">Войти</button>
+      <button
+        className={`form__button ${
+          !isValid && errors ? "form__button_disabled" : ""
+        }`}
+        type="submit"
+        disabled={!isValid}
+      >
+        Войти
+      </button>
       <p className="form__question">
         Ещё не зарегистрированы?
         <Link className="form__link" to="/signup">

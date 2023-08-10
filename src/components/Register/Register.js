@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import useValidation from "../../hooks/useFormValidation.js";
 
 function Register(props) {
-
-  const { values, handleChange, errors, isValid } =
-  useValidation({
+  const { values, handleChange, errors, isValid, resetForm } = useValidation({
     name: "",
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    resetForm({ name: "", email: "", password: "" });
+  }, [resetForm]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -62,7 +64,13 @@ function Register(props) {
         />
         <span className="form__error">{errors.password}</span>
       </label>
-      <button className="form__button" disabled={!isValid}>
+      <button
+        className={`form__button ${
+          !isValid && errors ? "form__button_disabled" : ""
+        }`}
+        type="submit"
+        disabled={!isValid}
+      >
         Зарегистрироваться
       </button>
       <p className="form__question">

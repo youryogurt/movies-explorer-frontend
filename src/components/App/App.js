@@ -27,6 +27,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [movies, setMovies] = useState([]); // стейт для списка фильмов
+  const [savedMovies, setSavedMovies] = useState([]); // стейт для сохраненных фильмов
   const [userRequestDone, setUserRequestDone] = useState(true);
 
   // прячем футер на страницах, где он не нужен
@@ -36,6 +37,18 @@ function App() {
 
   const navigate = useNavigate();
 
+  // получение данных пользователя
+  function getMainData() {
+    Promise.all([api.getUserInfo(), api.getSavedMovies()])
+      .then(([currentUser, savedMovies]) => {
+        setCurrentUser(currentUser);
+        setSavedMovies(savedMovies);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   // обработчик авторизации
   function handleLogin(email, password) {
     AuthApi.login(email, password)
@@ -43,10 +56,9 @@ function App() {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
           setLoggedIn(true);
-          // setCurrentUser(data);
+          getMainData(); // получаем данные пользователя
         }
         navigate("/movies");
-        console.log(data);
       })
       .catch((err) => {
         console.log(err);
@@ -67,7 +79,7 @@ function App() {
 
   // проверка токена
   function tokenCheck() {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem("jwt");
     if (!jwt) {
       return;
     }
@@ -148,7 +160,12 @@ function App() {
           <Route
             path="/saved-movies"
             element={
-              <ProtectedRoute element={SavedMovies} loggedIn={loggedIn} userRequestDone={userRequestDone} />
+              <ProtectedRoute
+                element={SavedMovies}
+                loggedIn={loggedIn}
+                userRequestDone={userRequestDone}
+                savedMovies={savedMovies}
+              />
             }
           />
 
@@ -161,10 +178,11 @@ function App() {
                 handleLogOut={handleLogOut}
                 handleUpdateUser={handleUpdateUser}
                 userRequestDone={userRequestDone}
+                currentUser={currentUser}
               />
             }
           />
-          
+
           <Route path="/" element={<Main />} />
           <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
 

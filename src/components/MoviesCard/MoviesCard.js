@@ -29,7 +29,7 @@ function MoviesCard(props) {
   }
 
   function openTrailer() {
-    window.open(props.card.trailerLink, "_blank");
+    window.open(props.movie.trailerLink, "_blank");
   }
 
   return (

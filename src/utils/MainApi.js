@@ -31,22 +31,27 @@ export class Api {
   
   // получение информации о залогиненном пользователе
   async getUserInfo() {
-    return await this._fetch('profile', 'GET');
+    return await this._fetch('users/me', 'GET');
+  }
+
+  // получение сохраненных фильмов
+  async getSavedMovies() {
+    return await this._fetch('movies', 'GET');
   }
 
   // изменение информации пользователя
   async setUserInfo(data) {
-    return await this._fetch('profile', 'PATCH', data);
+    return await this._fetch('users/me', 'PATCH', data);
   }
 
   // добавление фильма в список сохраненных
   async saveMovie(movieId) {
-    return await this._fetch(`saved-movies`, 'POST', movieId);
+    return await this._fetch(`movies/${movieId}`, 'POST', movieId);
   }
   
    // удаление фильма из списка сохраненных
   async deleteMovie(movieId) {
-    return await this._fetch(`saved-movies`, 'DELETE', movieId);
+    return await this._fetch(`movies/${movieId}`, 'DELETE', movieId);
   }
 
   async changeSavedMovieStatus(movieId, isSaved) {
@@ -57,11 +62,10 @@ export class Api {
   }
 }
 
-// вот это шляпа какая-то, скорее всего надо избавиться от этого
 const config = {
   BASE_URL: 'https://api.movexplorer.yoryogurt.nomoredomains.rocks',
 };
 
-const api = new Api(config); // надо что-то передать в скобки?
+const api = new Api(config);
 
 export default api;
