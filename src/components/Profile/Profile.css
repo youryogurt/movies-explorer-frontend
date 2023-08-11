@@ -31,7 +31,7 @@
 
 .profile__label {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   font-style: normal;
   font-weight: 500;

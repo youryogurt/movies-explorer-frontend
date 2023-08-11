@@ -109,9 +109,10 @@ function App() {
   }
 
   // обработчик обновления данных пользователя
-  function handleUpdateUser(data) {
+  function handleUpdateUser(name, email) {
+    const updatedUser = { name, email };
     api
-      .setUserInfo(data)
+      .setUserInfo(updatedUser)
       .then((res) => {
         setCurrentUser(res);
       })

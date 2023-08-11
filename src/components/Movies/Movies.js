@@ -51,17 +51,17 @@ function Movies(props) {
   }, []);
 
   // поиск фильмов
-  function handleSearch(movies, query) {
-    const initialMovies = movies.filter((movie) => {
+  function handleSearch() {
+    const initialMovies = props.movies.filter((movie) => {
       const movieRu = String(movie.nameRU).toLowerCase().trim();
-      const newQuery = query.toLowerCase().trim();
+      const newQuery = props.query.toLowerCase().trim();
       return movieRu.indexOf(newQuery) !== -1;
     });
     return initialMovies;
   }
 
-  function handleFilterMovies(movies, query, short) {
-    const moviesList = handleSearch(movies, query, short); 
+  function handleFilterMovies(short) {
+    const moviesList = handleSearch(props.movies, props.query, short); 
     setFoundMovies(moviesList);
     setFilteredMovies(short ? filterShortMovies(moviesList) : moviesList); 
     localStorage.setItem('filtredmovies', JSON.stringify(moviesList));
@@ -71,17 +71,17 @@ function Movies(props) {
   }
 
   // сабмит формы поиска
-  function handleSubmit(query) {
-    localStorage.setItem('query', query);
+  function handleSearchFormSubmit() {
+    // localStorage.setItem('query', query);
     localStorage.setItem('shortfilms', isCheckbox);
     
-    handleFilterMovies(props.movies, query, isCheckbox);
+    handleFilterMovies(props.movies, props.query, isCheckbox);
   }
 
   return (
     <div>
       <SearchForm
-        handleSubmit={handleSubmit} 
+        handleSearchFormSubmit={handleSearchFormSubmit} 
         isCheckbox={isCheckbox}
         onCheckbox={handleShortMoviesCheckbox}
       />

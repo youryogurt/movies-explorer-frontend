@@ -12,7 +12,7 @@ function SearchForm(props) {
   // сабмит формы поиска
   function handleSubmit(e) {
     e.preventDefault();
-    props.handleSubmit();
+    props.handleSearchFormSubmit(query);
   }
 
   return (

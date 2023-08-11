@@ -5,6 +5,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
 function Profile(props) {
   const [isDisabled, setIsDisabled] = useState(true);
+
   const { values, handleChange, errors, isValid, resetForm } = useValidation({
     name: "",
     email: "",
@@ -15,11 +16,12 @@ function Profile(props) {
   useEffect(() => {
     resetForm({ email: currentUser.email, name: currentUser.name });
   }, [currentUser, resetForm]);
-  
+
   useEffect(() => {
-    let isActiveButton = (currentUser.name !== values.name) || (currentUser.email !== values.email);
+    let isActiveButton =
+      currentUser.name !== values.name || currentUser.email !== values.email;
     setIsDisabled(isActiveButton);
-  }, [values, currentUser, isValid])
+  }, [values, currentUser, isValid]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -62,14 +64,19 @@ function Profile(props) {
           />
           <span className="form__error">{errors.email}</span>
         </label>
+        <button
+          className={`profile__button ${
+            !isValid && errors ? "profile__button_disabled" : ""
+          }`}
+          disabled={!isValid || !isDisabled}
+          type="submit"
+        >
+          Редактировать
+        </button>
+        <Link className="profile__link" to="/">
+          Выйти из аккаунта
+        </Link>
       </form>
-      <button
-        className={`profile__button ${!isValid && errors ? 'profile__button_disabled' : ''}`}
-        disabled={!isValid || !isDisabled}
-      >Редактировать</button>
-      <Link className="profile__link" to="/">
-        Выйти из аккаунта
-      </Link>
     </div>
   );
 }
