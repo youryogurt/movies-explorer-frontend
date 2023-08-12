@@ -182,7 +182,7 @@ function App() {
                 movies={movies}
                 loggedIn={loggedIn}
                 userRequestDone={userRequestDone}
-                onMovieLike={handleMovieLike}
+                onClick={handleMovieLike}
                 // onDelete={handleMovieDelete}
               />
             }
