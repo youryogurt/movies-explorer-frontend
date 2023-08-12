@@ -8,8 +8,7 @@ function Header(props) {
 
   if (
     location.pathname === "/signin" ||
-    location.pathname === "/signup" ||
-    location.pathname === "/edit"
+    location.pathname === "/signup"
   ) {
     return (
       <header className="simple-header">
