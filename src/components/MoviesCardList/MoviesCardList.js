@@ -67,12 +67,15 @@ function MoviesCardList(props) {
               <MoviesCard
                 key={props.isSavedFilms ? movie._id : movie.id}
                 movie={movie}
+                isSavedMovies={props.isSavedMovies}
                 savedMovies={props.savedMovies}
                 onCardClick={props.onCardClick}
                 onCardSave={props.onCardSave}
                 isSaved={isSaved}
                 setIsSaved={setIsSaved}
                 saved={getSavedMovies(props.savedMovies, movie)}
+                onClick={props.onClick}
+                onDelete={props.onDelete}
               />
             ))}
           </ul>

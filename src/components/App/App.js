@@ -105,6 +105,8 @@ function App() {
   // обработчик выхода
   function handleLogOut() {
     localStorage.removeItem("jwt");
+    localStorage.removeItem("shortfilms");
+    localStorage.removeItem("filtredmovies");
     setLoggedIn(false);
     navigate("/");
   }
@@ -144,13 +146,13 @@ function App() {
 
   // сохранение/лайк фильму
   function handleMovieLike(movie) {
+    console.log('hey');
     api.changeSavedMovieStatus(movie._id, true).then((newMovie) => {
       setSavedMovies((state) => [...state, newMovie]);
     }
     ).catch((err) => {
       console.log(err);
     });
-    console.log('gi');
   }
 
   // удаление фильма
@@ -172,7 +174,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
-        <Header />
+        <Header loggedIn={loggedIn} />
         <Routes>
           <Route
             path="/movies"

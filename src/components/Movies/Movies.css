@@ -24,6 +24,19 @@
   transition: all .5s;
 }
 
+.movies__error {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FFFFFF;
+  margin-top: 90px;
+}
+
 @media screen and (max-width: 560px) {
   .more-button { 
     width: 240px;

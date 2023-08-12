@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
 // import { getMovies } from "../../utils/MoviesApi.js";
 
 function Movies(props) {
@@ -9,6 +10,9 @@ function Movies(props) {
   const [isCheckbox, setIsCheckbox] = useState(false); // состояние чекбокса короткометражек
   const [filteredMovies, setFilteredMovies] = useState([]); // фильмы, полученные в результате фильтрации (чекбокс)
   const [isNotFoundError, setIsNotFoundError] = useState(false); // ошибка поиска, когда по запросу ничего не найдено
+
+  const [isLoading, setIsLoading] = useState(true); // состояние загрузки
+  const [error, setError] = useState(null); // состояние ошибки
 
   // получение списка фильмов
   // function getMoviesList() {
@@ -61,13 +65,18 @@ function Movies(props) {
   }
 
   function handleFilterMovies(query, short) {
-    const moviesList = handleSearch( query);
+    setIsLoading(true);
+    setError(null);
+
+    const moviesList = handleSearch(query);
     setFoundMovies(moviesList);
-    setFilteredMovies(short ? filterShortMovies(moviesList) : moviesList); 
-    localStorage.setItem('filtredmovies', JSON.stringify(moviesList));
+    setFilteredMovies(short ? filterShortMovies(moviesList) : moviesList);
+    localStorage.setItem("filtredmovies", JSON.stringify(moviesList));
     if (moviesList.length === 0) {
       setIsNotFoundError(true);
     }
+
+    setIsLoading(false);
   }
 
   function handleSearchFormSubmit(query) {
@@ -82,7 +91,22 @@ function Movies(props) {
         isCheckbox={isCheckbox}
         onCheckbox={handleShortMoviesCheckbox}
       />
-      <MoviesCardList movies={foundMovies} />
+      {/* <MoviesCardList movies={foundMovies} /> */}
+      {isLoading ? (
+        <Preloader />
+      ) : error ? (
+        <p className="movies__error">
+          Во время запроса произошла ошибка. Возможно, проблема с соединением
+          или сервер недоступен. Подождите немного и попробуйте ещё раз.
+        </p>
+      ) : foundMovies.length === 0 ? (
+        <p className="movies__error">Ничего не найдено</p>
+      ) : (
+        <MoviesCardList
+        movies={foundMovies}
+        onClick={props.onClick}
+        />
+      )}
     </div>
   );
 }

@@ -3,7 +3,7 @@ import logo from "../../images/logo.svg";
 import { Link, useLocation } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 
-function Header() {
+function Header(props) {
   const location = useLocation();
 
   if (
@@ -32,7 +32,7 @@ function Header() {
             alt="Белый смайлик с улыбкой без глаз в зеленом квадрате с закругленными краями"
           />
         </Link>
-        <Navigation />
+        <Navigation loggedIn={props.loggedIn} />
       </header>
     );
   }
