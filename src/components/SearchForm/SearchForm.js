@@ -4,7 +4,15 @@ import search from "../../images/search-icon.svg";
 
 function SearchForm(props) {
   const [query, setQuery] = useState("");
+  const [short, setShort] = useState(false);
   
+  // фильтрация короткометражек
+  function handleShortChange(e) {
+    e.preventDefault();
+    setShort(!short);
+    props.handleShortMoviesCheckbox(short);
+  }
+
   function handleChange(e) {
     setQuery(e.target.value);
   }
@@ -20,13 +28,15 @@ function SearchForm(props) {
       <div className="search-form">
         <img className="search-form__icon" alt="Лупа" src={search} />
         <form className="search-form__container" onSubmit={handleSubmit}>
-          <input type="text" placeholder="Фильм" className="search-input" required handleChange={handleChange} />
+        <input type="text" placeholder="Фильм" className="search-input" required onChange={handleChange} />
           <div className="search-form__items">
             <button type="submit" className="search-form__button"></button>
             <div className="search-form__line"></div>
             <FilterCheckbox
               className="search-form__checkbox"
               text="Короткометражки"
+              short={short}
+              onChange={handleShortChange}
             />
           </div>
 

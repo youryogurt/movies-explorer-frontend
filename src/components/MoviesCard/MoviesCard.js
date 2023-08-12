@@ -12,11 +12,11 @@ function MoviesCard(props) {
 
   function handleSaveMovie() {
     setIsSaved(!isSaved);
-    props.onMovieLike(props.movie);
+    props.onClick(props.movie);
   }
 
   function handleDeleteMovie() {
-    props.onMovieDelete(props.movie);
+    props.onDelete(props.movie);
   }
 
   function convertDuration(duration) {

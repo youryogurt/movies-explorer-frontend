@@ -21,6 +21,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 import { getMovies } from "../../utils/MoviesApi.js";
 import * as AuthApi from "../../utils/Auth.js";
 import api from "../../utils/MainApi.js";
+import Preloader from "../Preloader/Preloader";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -163,7 +164,10 @@ function App() {
         console.log(err);
       });
   }
-
+  
+  if (!loggedIn) {
+    return <Preloader />
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -179,7 +183,7 @@ function App() {
                 loggedIn={loggedIn}
                 userRequestDone={userRequestDone}
                 onMovieLike={handleMovieLike}
-                onMovieDelete={handleMovieDelete}
+                // onDelete={handleMovieDelete}
               />
             }
           />
@@ -192,8 +196,8 @@ function App() {
                 loggedIn={loggedIn}
                 userRequestDone={userRequestDone}
                 isSavedMovies={isSavedMovies}
-                onMovieLike={handleMovieLike}
-                onMovieDelete={handleMovieDelete}
+                onClick={handleMovieLike}
+                onDelete={handleMovieDelete}
               />
             }
           />
