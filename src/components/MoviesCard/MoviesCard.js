@@ -1,26 +1,23 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-// import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
+import React, { useState, useContext } from "react";
+import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 
 function MoviesCard(props) {
-  // const currentUser = React.useContext(CurrentUserContext);
-  const [isSaved, setIsSaved] = useState(false);
+  const currentUser = useContext(CurrentUserContext);
 
-  // const isOwn = card.owner === currentUser._id;
-  // const isLiked = card.likes.some(id => id === currentUser._id);
+  const [isSaved, setIsSaved] = useState(false);
 
   const cardSaveButtonClassName = `movies-card__unsave-film-button ${
     isSaved && "movies-card__save-film-button"
   }`;
 
-  // function handleCardClick() {
-  //   onCardClick(card);
-  // }
+  function handleSaveMovie() {
+    setIsSaved(!isSaved);
+    props.onMovieLike(props.movie);
+  }
 
-  // function handleSaveClick() {
-  //   onCardSave(card);
-  //   setIsSaved(!isSaved);
-  // }
+  function handleDeleteMovie() {
+    props.onMovieDelete(props.movie);
+  }
 
   function convertDuration(duration) {
     const hours = Math.floor(duration / 60);
@@ -42,21 +39,9 @@ function MoviesCard(props) {
         <button
           className={`${cardSaveButtonClassName}`}
           type="button"
-          // onClick={handleSaveClick}
+          onClick={handleSaveMovie}
+          onDelete={handleDeleteMovie}
         ></button>
-        {/* {isSaved ? (
-          <button
-            type="button"
-            className="movies-card__unsave-film-button"
-            onClick={() => setIsSaved(!isSaved)}
-          ></button>
-        ) : (
-          <button
-            type="button"
-            className="movies-card__save-film-button"
-            onClick={() => setIsSaved(!isSaved)}
-          ></button>
-        )} */}
       </div>
       <img
         className="movies-card__image"

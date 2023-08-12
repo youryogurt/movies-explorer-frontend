@@ -34,7 +34,7 @@
   margin: 0;
 }
 
-.movies-card__save-film-button {
+.movies-card__unsave-film-button {
   background-color: #313131;
   border-radius: 50%;
   width: 30px;
@@ -52,12 +52,12 @@
   background-size: 10px;
 }
 
-.movies-card__save-film-button:hover {
+.movies-card__unsave-film-button:hover {
   opacity: 0.7;
   transition: all .5s;
 }
 
-.movies-card__unsave-film-button {
+.movies-card__save-film-button {
   background-color: #3DDC84;
   border-radius: 50%;
   width: 30px;
@@ -75,7 +75,7 @@
   background-size: 10px;
 }
 
-.movies-card__unsave-film-button:hover {
+.movies-card__save-film-button:hover {
   opacity: 0.7;
   transition: all .5s;
 }

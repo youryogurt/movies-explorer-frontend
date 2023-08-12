@@ -45,8 +45,24 @@ export class Api {
   }
 
   // добавление фильма в список сохраненных
-  async saveMovie(movieId) {
-    return await this._fetch(`movies/${movieId}`, 'POST', movieId);
+  // async saveMovie(movieId) {
+  //   return await this._fetch(`movies/${movieId}`, 'POST', movieId);
+  // }
+
+  async saveMovie(data) {
+    return await this._fetch(`movies/${data.movieId}`, 'POST', {
+      country: data.country,
+      director: data.director,
+      duration: data.duration,
+      year: data.year,
+      description: data.description,
+      image: 'https://api.nomoreparties.co' + data.image.url,
+      trailerLink: data.trailerLink,
+      thumbnail: 'https://api.nomoreparties.co' + data.image.formats.thumbnail.url,
+      movieId: data.id,
+      nameRU: data.nameRU,
+      nameEN: data.nameEN,
+    });
   }
   
    // удаление фильма из списка сохраненных

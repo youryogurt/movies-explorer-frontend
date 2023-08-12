@@ -2,7 +2,6 @@ import "../../index.css";
 import {
   Route,
   Routes,
-  Navigate,
   useNavigate,
   useLocation,
 } from "react-router-dom";
@@ -27,7 +26,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [movies, setMovies] = useState([]); // стейт для списка фильмов
-  const [savedMovies, setSavedMovies] = useState([]); // стейт для сохраненных фильмов
+  const [isSavedMovies, setSavedMovies] = useState([]); // стейт для сохраненных фильмов
   const [userRequestDone, setUserRequestDone] = useState(true);
 
   // прячем футер на страницах, где он не нужен
@@ -40,9 +39,9 @@ function App() {
   // получение данных пользователя
   function getMainData() {
     Promise.all([api.getUserInfo(), api.getSavedMovies()])
-      .then(([currentUser, savedMovies]) => {
+      .then(([currentUser, isSavedMovies]) => {
         setCurrentUser(currentUser);
-        setSavedMovies(savedMovies);
+        setSavedMovies(isSavedMovies);
       })
       .catch((err) => {
         console.log(err);
@@ -96,7 +95,8 @@ function App() {
         setUserRequestDone(true);
       });
   }
-
+  
+  // проверка токена при загрузке страницы, чтобы сохранить авторизованное состояние
   useEffect(() => {
     tokenCheck();
   }, []);
@@ -123,6 +123,7 @@ function App() {
 
   // получение списка фильмов
   function getMoviesList() {
+    console.log(loggedIn);
     getMovies()
       .then((res) => {
         setMovies(res);
@@ -134,12 +135,35 @@ function App() {
   }
 
   // загрузка списка фильмов при первом рендере в авторризованном состоянии
-  useEffect(
-    (loggedIn) => {
+  useEffect(() => {
+    if (loggedIn) {
       getMoviesList();
-    },
-    [loggedIn]
-  );
+    }
+  }, [loggedIn]);
+
+  // сохранение/лайк фильму
+  function handleMovieLike(movie) {
+    api.changeSavedMovieStatus(movie._id, true).then((newMovie) => {
+      setSavedMovies((state) => [...state, newMovie]);
+    }
+    ).catch((err) => {
+      console.log(err);
+    });
+    console.log('gi');
+  }
+
+  // удаление фильма
+  function handleMovieDelete(movie) {
+    api
+      .changeSavedMovieStatus(movie._id, false)
+      .then(() => {
+        setSavedMovies((state) => state.filter((c) => c._id !== movie._id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -154,6 +178,8 @@ function App() {
                 movies={movies}
                 loggedIn={loggedIn}
                 userRequestDone={userRequestDone}
+                onMovieLike={handleMovieLike}
+                onMovieDelete={handleMovieDelete}
               />
             }
           />
@@ -165,7 +191,9 @@ function App() {
                 element={SavedMovies}
                 loggedIn={loggedIn}
                 userRequestDone={userRequestDone}
-                savedMovies={savedMovies}
+                isSavedMovies={isSavedMovies}
+                onMovieLike={handleMovieLike}
+                onMovieDelete={handleMovieDelete}
               />
             }
           />
