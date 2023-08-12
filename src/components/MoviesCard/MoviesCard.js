@@ -1,14 +1,20 @@
-import React, { useState, useContext } from "react";
-import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
+import React, { useState, useLocation, useContext } from "react";
+// import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 
 function MoviesCard(props) {
-  const currentUser = useContext(CurrentUserContext);
-
+  // const currentUser = useContext(CurrentUserContext);
   const [isSaved, setIsSaved] = useState(false);
+  
+  // const location = useLocation();
+  // const isSavedMoviesPage = location.pathname === "/saved-movies";
 
   const cardSaveButtonClassName = `movies-card__unsave-film-button ${
     isSaved && "movies-card__save-film-button"
   }`;
+
+  // const cardButtonClassName = isSavedMoviesPage
+  //   ? "movies-card__delete-film-button"
+  //   : cardSaveButtonClassName;
 
   function handleSaveMovie() {
     setIsSaved(!isSaved);

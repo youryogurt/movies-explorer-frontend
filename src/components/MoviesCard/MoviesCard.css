@@ -23,6 +23,11 @@
   color: #FFFFFF;
   margin-top: 0;
   margin-bottom: 9px;
+  max-width: 280px;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .movies-card__duration {
@@ -108,11 +113,25 @@
   object-fit: cover;
   object-position: center;
   display: block;
-  max-height: 203px;
+  height: 203px;
+}
+
+@media screen and (max-width: 1024px) {
+  .movies-card__name {
+    max-width: 250px;
+  }
+
+  .movies-card__image {
+    height: 190px;
+  }
 }
 
 @media screen and (max-width: 560px) {
   .movies-card__image {
-    max-height: 168px;
+    height: 168px;
+  }
+
+  .movies-card__name {
+    max-width: 210px;
   }
 }
