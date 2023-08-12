@@ -29,6 +29,11 @@ function Profile(props) {
       props.handleUpdateUser(values.name, values.email);
     }
   }
+  
+  // обработчик выхода из аккаунта
+  function handleLognOut() {
+    props.handleSignOut();
+  }
 
   return (
     <div className="profile__section">
@@ -73,9 +78,9 @@ function Profile(props) {
         >
           Редактировать
         </button>
-        <Link className="profile__link" to="/">
+        <button className="profile__button_logout" onClick={handleLognOut}>
           Выйти из аккаунта
-        </Link>
+        </button>
       </form>
     </div>
   );

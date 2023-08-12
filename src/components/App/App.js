@@ -167,9 +167,15 @@ function App() {
       });
   }
   
-  if (!loggedIn) {
-    return <Preloader />
-  }
+  // if (!loggedIn) {
+  //   return (
+  //     <div className="app">
+  //       <Header />
+  //       <Main />
+  //       <Footer />
+  //     </div>
+  //   )
+  // }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -210,7 +216,7 @@ function App() {
               <ProtectedRoute
                 element={Profile}
                 loggedIn={loggedIn}
-                handleLogOut={handleLogOut}
+                handleSignOut={handleLogOut}
                 handleUpdateUser={handleUpdateUser}
                 userRequestDone={userRequestDone}
                 currentUser={currentUser}
