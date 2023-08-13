@@ -1,10 +1,5 @@
 import "../../index.css";
-import {
-  Route,
-  Routes,
-  useNavigate,
-  useLocation,
-} from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
@@ -29,6 +24,8 @@ function App() {
   const [movies, setMovies] = useState([]); // стейт для списка фильмов
   const [isSavedMovies, setSavedMovies] = useState([]); // стейт для сохраненных фильмов
   const [userRequestDone, setUserRequestDone] = useState(true);
+
+  const [loading, setLoading] = useState(true);
 
   // прячем футер на страницах, где он не нужен
   const location = useLocation();
@@ -81,6 +78,7 @@ function App() {
   function tokenCheck() {
     const jwt = localStorage.getItem("jwt");
     if (!jwt) {
+      setLoading(false);
       return;
     }
     AuthApi.getContent(jwt)
@@ -93,10 +91,11 @@ function App() {
         console.log(err);
       })
       .finally(() => {
+        setLoading(false);
         setUserRequestDone(true);
       });
   }
-  
+
   // проверка токена при загрузке страницы, чтобы сохранить авторизованное состояние
   useEffect(() => {
     tokenCheck();
@@ -146,13 +145,15 @@ function App() {
 
   // сохранение/лайк фильму
   function handleMovieLike(movie) {
-    console.log('hey');
-    api.changeSavedMovieStatus(movie._id, true).then((newMovie) => {
-      setSavedMovies((state) => [...state, newMovie]);
-    }
-    ).catch((err) => {
-      console.log(err);
-    });
+    console.log("hey");
+    api
+      .changeSavedMovieStatus(movie._id, true)
+      .then((newMovie) => {
+        setSavedMovies((state) => [...state, newMovie]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   // удаление фильма
@@ -166,68 +167,71 @@ function App() {
         console.log(err);
       });
   }
-  
-  // if (!loggedIn) {
-  //   return <Preloader />;
-  // }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
         <Header loggedIn={loggedIn} />
-        <Routes>
-          <Route
-            path="/movies"
-            element={
-              <ProtectedRoute
-                element={Movies}
-                movies={movies}
-                loggedIn={loggedIn}
-                userRequestDone={userRequestDone}
-                onClick={handleMovieLike}
-                // onDelete={handleMovieDelete}
-              />
-            }
-          />
+        {loading ? (
+          <Preloader />
+        ) : (
+          <Routes>
+            <Route
+              path="/movies"
+              element={
+                <ProtectedRoute
+                  element={Movies}
+                  movies={movies}
+                  loggedIn={loggedIn}
+                  userRequestDone={userRequestDone}
+                  onClick={handleMovieLike}
+                  // onDelete={handleMovieDelete}
+                />
+              }
+            />
 
-          <Route
-            path="/saved-movies"
-            element={
-              <ProtectedRoute
-                element={SavedMovies}
-                loggedIn={loggedIn}
-                userRequestDone={userRequestDone}
-                isSavedMovies={isSavedMovies}
-                onClick={handleMovieLike}
-                onDelete={handleMovieDelete}
-              />
-            }
-          />
+            <Route
+              path="/saved-movies"
+              element={
+                <ProtectedRoute
+                  element={SavedMovies}
+                  loggedIn={loggedIn}
+                  userRequestDone={userRequestDone}
+                  isSavedMovies={isSavedMovies}
+                  onClick={handleMovieLike}
+                  onDelete={handleMovieDelete}
+                />
+              }
+            />
 
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute
-                element={Profile}
-                loggedIn={loggedIn}
-                handleSignOut={handleLogOut}
-                handleUpdateUser={handleUpdateUser}
-                userRequestDone={userRequestDone}
-                currentUser={currentUser}
-              />
-            }
-          />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute
+                  element={Profile}
+                  loggedIn={loggedIn}
+                  handleSignOut={handleLogOut}
+                  handleUpdateUser={handleUpdateUser}
+                  userRequestDone={userRequestDone}
+                  currentUser={currentUser}
+                />
+              }
+            />
 
-          <Route path="/" element={<Main />} />
-          <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
+            <Route path="/" element={<Main />} />
+            <Route
+              path="/signin"
+              element={<Login handleLogin={handleLogin} />}
+            />
 
-          <Route
-            path="/signup"
-            element={<Register handleRegister={handleRegister} />}
-          />
+            <Route
+              path="/signup"
+              element={<Register handleRegister={handleRegister} />}
+            />
 
-          <Route path="/*" element={<NotFound />} />
-        </Routes>
+            <Route path="/*" element={<NotFound />} />
+          </Routes>
+        )}
         {shouldShowFooter && <Footer />}
       </div>
     </CurrentUserContext.Provider>
