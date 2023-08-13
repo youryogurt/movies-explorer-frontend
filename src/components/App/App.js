@@ -142,7 +142,7 @@ function App() {
       getMoviesList();
     }
   }, [loggedIn]);
-  
+
   // сохранение/лайк фильму
   function handleMovieLike(movie) {
     api
@@ -167,6 +167,25 @@ function App() {
         console.log(err);
       });
   }
+
+  // получение списка сохраненных фильмов для отрисовки
+  function getSavedMoviesList() {
+    api
+      .getSavedMovies()
+      .then((res) => {
+        setSavedMovies(res);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  useEffect(() => {
+    if (loggedIn) {
+      getSavedMoviesList();
+    }
+  }, [loggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -200,6 +219,7 @@ function App() {
                   isSavedMovies={isSavedMovies}
                   onClick={handleMovieLike}
                   onDelete={handleMovieDelete}
+                  getSavedMovies={getSavedMoviesList}
                 />
               }
             />

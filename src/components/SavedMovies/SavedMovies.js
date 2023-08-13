@@ -1,7 +1,7 @@
 import React from "react";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
-import { useEffect } from "react";
+
 
 function SavedMovies(props) {
 

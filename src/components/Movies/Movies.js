@@ -8,8 +8,7 @@ import Preloader from "../Preloader/Preloader";
 function Movies(props) {
   const [foundMovies, setFoundMovies] = useState([]); // массив найденных фильмов по запросу
   const [isCheckbox, setIsCheckbox] = useState(false); // состояние чекбокса короткометражек
-  const [filteredMovies, setFilteredMovies] = useState([]); // фильмы, полученные в результате фильтрации (чекбокс)
-  
+
   const [isLoading, setIsLoading] = useState(true); // состояние загрузки
   const [error, setError] = useState(null); // состояние ошибки
 
@@ -29,17 +28,17 @@ function Movies(props) {
   // const movies = getMoviesList();
 
   // фильтрация фильмов (короткометражки)
-  function filterShortMovies() {
-    return props.movies.filter((movie) => movie.duration <= 40);
+  function filterShortMovies(foundMovies) {
+    return foundMovies.filter((movie) => movie.duration <= 40);
   }
 
   // переключение чекбокса короткометражек
   function handleShortMoviesCheckbox(checked) {
     setIsCheckbox(checked);
     if (!checked) {
-      setFilteredMovies(filterShortMovies(foundMovies));
+      setFoundMovies(filterShortMovies(foundMovies));
     } else {
-      setFilteredMovies(foundMovies);
+      setFoundMovies(foundMovies);
     }
     localStorage.setItem("shortfilms", checked);
   }
@@ -66,12 +65,8 @@ function Movies(props) {
 
     const moviesList = handleSearch(query);
     setFoundMovies(moviesList);
-    setFilteredMovies(short ? filterShortMovies(moviesList) : moviesList);
+    setFoundMovies(short ? filterShortMovies(moviesList) : moviesList);
     localStorage.setItem("filtredmovies", JSON.stringify(moviesList));
-    // if (moviesList.length === 0) {
-    //   setIsNotFoundError(true);
-    // }
-
     setIsLoading(false);
   }
 
@@ -79,6 +74,17 @@ function Movies(props) {
     localStorage.setItem("shortfilms", isCheckbox);
     handleFilterMovies(query, isCheckbox);
   }
+ 
+  // отрисовка тех фильмов, которые я искала ранее, при перезагрузке страницы
+  useEffect(() => {
+    if (localStorage.getItem("filtredmovies")) {
+      const moviesList = JSON.parse(localStorage.getItem("filtredmovies"));
+      setFoundMovies(moviesList);
+      setFoundMovies(isCheckbox ? filterShortMovies(moviesList) : moviesList);
+      setIsLoading(false);
+    }
+  }, []);
+
 
   return (
     <div>
