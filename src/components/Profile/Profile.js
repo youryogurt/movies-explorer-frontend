@@ -50,6 +50,7 @@ function Profile(props) {
             name="name"
             value={values.name || ""}
             placeholder={currentUser.name}
+            pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"
           />
           <span className="profile__form-error">{errors.name}</span>
         </label>

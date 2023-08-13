@@ -34,6 +34,7 @@ function Register(props) {
           type="text"
           name="name"
           value={values.name || ""}
+          pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"
         />
         <span className="form__error">{errors.name}</span>
       </label>
