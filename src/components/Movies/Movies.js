@@ -35,23 +35,20 @@ function Movies(props) {
   }
 
   // переключение чекбокса короткометражек
-  function handleShortMoviesCheckbox() {
-    setIsCheckbox(!isCheckbox);
-    if (!isCheckbox) {
+  function handleShortMoviesCheckbox(checked) {
+    setIsCheckbox(checked);
+    if (!checked) {
       setFilteredMovies(filterShortMovies(foundMovies));
     } else {
       setFilteredMovies(foundMovies);
     }
-    localStorage.setItem("shortfilms", !isCheckbox);
+    localStorage.setItem("shortfilms", checked);
   }
 
   // установка положения чекбокса
   useEffect(() => {
-    if (localStorage.getItem("shortfilms") === "true") {
-      setIsCheckbox(true);
-    } else {
-      setIsCheckbox(false);
-    }
+    console.log(localStorage.getItem("shortfilms"))
+    setIsCheckbox(localStorage.getItem("shortfilms") === "true");
   }, []);
 
   // поиск фильмов
@@ -91,7 +88,6 @@ function Movies(props) {
         isCheckbox={isCheckbox}
         onCheckbox={handleShortMoviesCheckbox}
       />
-      {/* <MoviesCardList movies={foundMovies} /> */}
       {isLoading ? (
         <Preloader />
       ) : error ? (

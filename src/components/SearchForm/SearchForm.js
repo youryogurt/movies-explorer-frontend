@@ -4,13 +4,10 @@ import search from "../../images/search-icon.svg";
 
 function SearchForm(props) {
   const [query, setQuery] = useState("");
-  const [short, setShort] = useState(false);
-  
+
   // фильтрация короткометражек
   function handleShortChange(e) {
-    e.preventDefault();
-    setShort(!short);
-    props.handleShortMoviesCheckbox(short);
+    props.onCheckbox(e.target.checked);
   }
 
   function handleChange(e) {
@@ -35,7 +32,7 @@ function SearchForm(props) {
             <FilterCheckbox
               className="search-form__checkbox"
               text="Короткометражки"
-              short={short}
+              short={props.isCheckbox}
               onChange={handleShortChange}
             />
           </div>
@@ -49,6 +46,8 @@ function SearchForm(props) {
         <FilterCheckbox
           className="search-form__checkbox"
           text="Короткометражки"
+          short={props.isCheckbox}
+          onChange={handleShortChange}
         />
       </div>
     </section>

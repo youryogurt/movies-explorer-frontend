@@ -12,8 +12,7 @@ function SavedMovies(props) {
         onDelete={props.onDelete}
         isSavedMovies={props.isSavedMovies}
         />
-      {/* <section className="movies-card-list">
-      </section> */}
+
     </div>
   );
 }

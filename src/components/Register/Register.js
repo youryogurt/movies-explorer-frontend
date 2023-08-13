@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import useValidation from "../../hooks/useFormValidation.js";
 
 function Register(props) {
-  const { values, handleChange, errors, isValid, resetForm } = useValidation({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const { values, handleChange, errors, isValid, resetForm } =
+    useValidation({
+      name: "",
+      email: "",
+      password: "",
+    });
 
   useEffect(() => {
     resetForm({ name: "", email: "", password: "" });

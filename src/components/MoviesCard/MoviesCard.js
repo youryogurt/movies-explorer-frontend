@@ -19,6 +19,7 @@ function MoviesCard(props) {
   function handleSaveMovie() {
     setIsSaved(!isSaved);
     props.onClick(props.movie);
+    console.log(props.movie.country);
   }
 
   function handleDeleteMovie() {

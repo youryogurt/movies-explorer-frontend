@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
-// import Preloader from "../Preloader/Preloader";
+import { useLocation } from "react-router-dom";
 
 import {
   SCREEN_L,
@@ -12,6 +12,7 @@ import {
 } from "../../utils/constants";
 
 function MoviesCardList(props) {
+  const location = useLocation();
   const [isSaved, setIsSaved] = useState(false);
 
   const [shownMovies, setShownMovies] = useState(12);
@@ -46,8 +47,8 @@ function MoviesCardList(props) {
     }, 1000);
   });
 
-  // function getSavedMovies(savedMovies, movie) {
-  //   return savedMovies.find((savedMovie) => savedMovie.movieId === movie.id);
+  // function getSavedMovies(isSavedMovies, movie) {
+  //   return isSavedMovies.find((savedMovie) => savedMovie.movieId === movie.id);
   // }
 
   // просто функция-пустышка пока что
@@ -57,27 +58,55 @@ function MoviesCardList(props) {
 
   return (
     <section className="movies-card-list-section">
-      <ul className="movies-card-list">
-        {props.movies.slice(0, shownMovies).map((movie) => (
-          <MoviesCard
-            key={props.isSavedFilms ? movie._id : movie.id}
-            movie={movie}
-            isSavedMovies={props.isSavedMovies}
-            savedMovies={props.savedMovies}
-            onCardClick={props.onCardClick}
-            onCardSave={props.onCardSave}
-            isSaved={isSaved}
-            setIsSaved={setIsSaved}
-            saved={getSavedMovies(props.savedMovies, movie)}
-            onClick={props.onClick}
-            onDelete={props.onDelete}
-          />
-        ))}
-      </ul>
-      {props.movies.length > shownMovies && (
-        <button className="more-button" type="button" onClick={handleShowMore}>
-          Ещё
-        </button>
+      {location.pathname === "/movies" && (
+        <>
+          <ul className="movies-card-list">
+            {props.movies.slice(0, shownMovies).map((movie) => (
+              <MoviesCard
+                key={props.isSavedFilms ? movie._id : movie.id}
+                movie={movie}
+                isSavedMovies={props.isSavedMovies}
+                savedMovies={props.savedMovies}
+                onCardClick={props.onCardClick}
+                onCardSave={props.onCardSave}
+                isSaved={isSaved}
+                setIsSaved={setIsSaved}
+                saved={getSavedMovies(props.savedMovies, movie)}
+                onClick={props.onClick}
+                onDelete={props.onDelete}
+              />
+            ))}
+          </ul>
+          {props.movies.length > shownMovies && (
+            <button
+              className="more-button"
+              type="button"
+              onClick={handleShowMore}
+            >
+              Ещё
+            </button>
+          )}
+        </>
+      )}
+
+      {location.pathname === "/saved-movies" && (
+        <ul className="movies-card-list">
+          {props.isSavedMovies.slice(0, shownMovies).map((movie) => (
+            <MoviesCard
+              key={props.isSavedFilms ? movie._id : movie.id}
+              movie={movie}
+              isSavedMovies={props.isSavedMovies}
+              savedMovies={props.savedMovies}
+              onCardClick={props.onCardClick}
+              onCardSave={props.onCardSave}
+              isSaved={isSaved}
+              setIsSaved={setIsSaved}
+              saved={getSavedMovies(props.savedMovies, movie)}
+              onClick={props.onClick}
+              onDelete={props.onDelete}
+            />
+          ))}
+        </ul>
       )}
     </section>
   );

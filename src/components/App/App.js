@@ -145,7 +145,7 @@ function App() {
 
   // сохранение/лайк фильму
   function handleMovieLike(movie) {
-    console.log("hey");
+    console.log(movie.country);
     api
       .changeSavedMovieStatus(movie._id, true)
       .then((newMovie) => {

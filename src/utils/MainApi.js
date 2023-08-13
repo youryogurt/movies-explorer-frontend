@@ -49,19 +49,19 @@ export class Api {
   //   return await this._fetch(`movies/${movieId}`, 'POST', movieId);
   // }
 
-  async saveMovie(data) {
-    return await this._fetch(`movies/${data.movieId}`, 'POST', {
-      country: data.country,
-      director: data.director,
-      duration: data.duration,
-      year: data.year,
-      description: data.description,
-      image: 'https://api.nomoreparties.co' + data.image.url,
-      trailerLink: data.trailerLink,
-      thumbnail: 'https://api.nomoreparties.co' + data.image.formats.thumbnail.url,
-      movieId: data.id,
-      nameRU: data.nameRU,
-      nameEN: data.nameEN,
+  async saveMovie(movie) {
+    return await this._fetch(`movies`, 'POST', {
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: 'https://api.nomoreparties.co' + movie.image.url,
+      trailerLink: movie.trailerLink,
+      thumbnail: 'https://api.nomoreparties.co' + movie.image.formats.thumbnail.url,
+      movieId: movie.id,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
     });
   }
   
