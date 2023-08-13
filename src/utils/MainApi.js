@@ -62,16 +62,16 @@ export class Api {
   }
   
    // удаление фильма из списка сохраненных
-  async deleteMovie(movieId) {
-    return await this._fetch(`movies/${movieId}`, 'DELETE', movieId);
+  async deleteMovie(movie) {
+    return await this._fetch(`movies/${movie}`, 'DELETE');
   }
 
-  async changeSavedMovieStatus(movieId, isSaved) {
-    if (isSaved) {
-      return await this.saveMovie(movieId);
-    }
-    return await this.deleteMovie(movieId)
-  }
+  // async changeSavedMovieStatus(movieId, isSaved) {
+  //   if (isSaved) {
+  //     return await this.saveMovie(movieId);
+  //   }
+  //   return await this.deleteMovie(movieId)
+  // }
 }
 
 const config = {

@@ -159,7 +159,7 @@ function App() {
   // удаление фильма
   function handleMovieDelete(movie) {
     api
-      .changeSavedMovieStatus(movie._id, false)
+      .deleteMovie(movie._id, false)
       .then(() => {
         setSavedMovies((state) => state.filter((c) => c._id !== movie._id));
       })
@@ -217,8 +217,8 @@ function App() {
                   loggedIn={loggedIn}
                   userRequestDone={userRequestDone}
                   isSavedMovies={isSavedMovies}
-                  onClick={handleMovieLike}
-                  onDelete={handleMovieDelete}
+                  // onClick={handleMovieLike}
+                  onClick={handleMovieDelete}
                   getSavedMovies={getSavedMoviesList}
                 />
               }

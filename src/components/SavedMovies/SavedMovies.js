@@ -10,7 +10,7 @@ function SavedMovies(props) {
       <SearchForm />
       <MoviesCardList
         // onClick={props.onClick}
-        onDelete={props.onDelete}
+        onClick={props.onClick}
         isSavedMovies={props.isSavedMovies}
         />
 

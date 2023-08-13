@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 function MoviesCard(props) {
@@ -16,8 +16,7 @@ function MoviesCard(props) {
   }
 
   function handleDeleteMovie() {
-    console.log("delete");
-    props.onDelete(props.movie);
+    props.onClick(props.movie);
   }
 
   function convertDuration(duration) {
@@ -51,7 +50,7 @@ function MoviesCard(props) {
           className="movies-card__delete-film-button"
           type="button"
           // onClick={handleSaveMovie}
-          onDelete={handleDeleteMovie}
+          onClick={handleDeleteMovie}
         ></button>
         )}
 

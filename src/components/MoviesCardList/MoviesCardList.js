@@ -75,7 +75,7 @@ function MoviesCardList(props) {
                 // saved={props.isSavedMovies}
                 // saved={getSavedMovies(props.savedMovies, movie)}
                 onClick={props.onClick}
-                onDelete={props.onDelete}
+                // onDelete={props.onDelete}
               />
             ))}
           </ul>
@@ -107,7 +107,7 @@ function MoviesCardList(props) {
               saved={props.isSavedMovies}
               // saved={getSavedMovies(props.savedMovies, movie)}
               // onClick={props.onClick}
-              onDelete={props.onDelete}
+              onClick={props.onClick}
             />
           ))}
         </ul>
