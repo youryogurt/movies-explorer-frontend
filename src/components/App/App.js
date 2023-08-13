@@ -168,13 +168,7 @@ function App() {
   }
   
   // if (!loggedIn) {
-  //   return (
-  //     <div className="app">
-  //       <Header />
-  //       <Main />
-  //       <Footer />
-  //     </div>
-  //   )
+  //   return <Preloader />;
   // }
 
   return (
