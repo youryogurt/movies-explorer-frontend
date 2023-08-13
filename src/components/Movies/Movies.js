@@ -9,8 +9,7 @@ function Movies(props) {
   const [foundMovies, setFoundMovies] = useState([]); // массив найденных фильмов по запросу
   const [isCheckbox, setIsCheckbox] = useState(false); // состояние чекбокса короткометражек
   const [filteredMovies, setFilteredMovies] = useState([]); // фильмы, полученные в результате фильтрации (чекбокс)
-  const [isNotFoundError, setIsNotFoundError] = useState(false); // ошибка поиска, когда по запросу ничего не найдено
-
+  
   const [isLoading, setIsLoading] = useState(true); // состояние загрузки
   const [error, setError] = useState(null); // состояние ошибки
 
@@ -69,9 +68,9 @@ function Movies(props) {
     setFoundMovies(moviesList);
     setFilteredMovies(short ? filterShortMovies(moviesList) : moviesList);
     localStorage.setItem("filtredmovies", JSON.stringify(moviesList));
-    if (moviesList.length === 0) {
-      setIsNotFoundError(true);
-    }
+    // if (moviesList.length === 0) {
+    //   setIsNotFoundError(true);
+    // }
 
     setIsLoading(false);
   }

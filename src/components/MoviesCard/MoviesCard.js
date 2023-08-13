@@ -1,28 +1,22 @@
-import React, { useState, useLocation, useContext } from "react";
-// import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
+import React, { useState, useContext } from "react";
+import { useLocation } from "react-router-dom";
 
 function MoviesCard(props) {
-  // const currentUser = useContext(CurrentUserContext);
   const [isSaved, setIsSaved] = useState(false);
   
-  // const location = useLocation();
-  // const isSavedMoviesPage = location.pathname === "/saved-movies";
+  const location = useLocation();
 
   const cardSaveButtonClassName = `movies-card__unsave-film-button ${
     isSaved && "movies-card__save-film-button"
   }`;
 
-  // const cardButtonClassName = isSavedMoviesPage
-  //   ? "movies-card__delete-film-button"
-  //   : cardSaveButtonClassName;
-
   function handleSaveMovie() {
     setIsSaved(!isSaved);
     props.onClick(props.movie);
-    console.log(props.movie.country);
   }
 
   function handleDeleteMovie() {
+    console.log("delete");
     props.onDelete(props.movie);
   }
 
@@ -43,12 +37,24 @@ function MoviesCard(props) {
           <h4 className="movies-card__name">{props.movie.nameRU}</h4>
           <p className="movies-card__duration">{convertDuration(props.movie.duration)}</p>
         </div>
-        <button
+        {location.pathname === "/movies" && (
+          <button
           className={`${cardSaveButtonClassName}`}
           type="button"
           onClick={handleSaveMovie}
+          // onDelete={handleDeleteMovie}
+        ></button>
+        )}
+
+        {location.pathname === "/saved-movies" && (
+          <button
+          className="movies-card__delete-film-button"
+          type="button"
+          // onClick={handleSaveMovie}
           onDelete={handleDeleteMovie}
         ></button>
+        )}
+
       </div>
       <img
         className="movies-card__image"

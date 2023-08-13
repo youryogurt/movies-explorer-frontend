@@ -45,10 +45,6 @@ export class Api {
   }
 
   // добавление фильма в список сохраненных
-  // async saveMovie(movieId) {
-  //   return await this._fetch(`movies/${movieId}`, 'POST', movieId);
-  // }
-
   async saveMovie(movie) {
     return await this._fetch(`movies`, 'POST', {
       country: movie.country,

@@ -106,6 +106,7 @@ function App() {
     localStorage.removeItem("jwt");
     localStorage.removeItem("shortfilms");
     localStorage.removeItem("filtredmovies");
+    localStorage.removeItem("savedmovies");
     setLoggedIn(false);
     navigate("/");
   }
@@ -125,7 +126,6 @@ function App() {
 
   // получение списка фильмов
   function getMoviesList() {
-    console.log(loggedIn);
     getMovies()
       .then((res) => {
         setMovies(res);
@@ -142,14 +142,14 @@ function App() {
       getMoviesList();
     }
   }, [loggedIn]);
-
+  
   // сохранение/лайк фильму
   function handleMovieLike(movie) {
-    console.log(movie.country);
     api
-      .changeSavedMovieStatus(movie._id, true)
+      .changeSavedMovieStatus(movie, true)
       .then((newMovie) => {
         setSavedMovies((state) => [...state, newMovie]);
+        localStorage.setItem("savedmovies", JSON.stringify(newMovie));
       })
       .catch((err) => {
         console.log(err);

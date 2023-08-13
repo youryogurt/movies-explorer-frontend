@@ -1,6 +1,5 @@
 export const MOVIESAPI_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 export const MAINAPI_URL = 'https://api.nomoreparties.co/beatfilm-movies';
-// export const BASE_URL = 'http://localhost:3000';
 export const BASE_URL = 'https://api.movexplorer.yoryogurt.nomoredomains.rocks';
 
 

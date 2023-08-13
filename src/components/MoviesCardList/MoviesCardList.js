@@ -54,6 +54,7 @@ function MoviesCardList(props) {
   // просто функция-пустышка пока что
   function getSavedMovies() {
     console.log("hi");
+    // return localStorage.getItem("savedmovies");
   }
 
   return (
@@ -71,7 +72,8 @@ function MoviesCardList(props) {
                 onCardSave={props.onCardSave}
                 isSaved={isSaved}
                 setIsSaved={setIsSaved}
-                saved={getSavedMovies(props.savedMovies, movie)}
+                // saved={props.isSavedMovies}
+                // saved={getSavedMovies(props.savedMovies, movie)}
                 onClick={props.onClick}
                 onDelete={props.onDelete}
               />
@@ -93,7 +95,8 @@ function MoviesCardList(props) {
         <ul className="movies-card-list">
           {props.isSavedMovies.slice(0, shownMovies).map((movie) => (
             <MoviesCard
-              key={props.isSavedFilms ? movie._id : movie.id}
+              // key={props.isSavedFilms ? movie._id : movie.id}
+              key={movie.id}
               movie={movie}
               isSavedMovies={props.isSavedMovies}
               savedMovies={props.savedMovies}
@@ -101,8 +104,9 @@ function MoviesCardList(props) {
               onCardSave={props.onCardSave}
               isSaved={isSaved}
               setIsSaved={setIsSaved}
-              saved={getSavedMovies(props.savedMovies, movie)}
-              onClick={props.onClick}
+              saved={props.isSavedMovies}
+              // saved={getSavedMovies(props.savedMovies, movie)}
+              // onClick={props.onClick}
               onDelete={props.onDelete}
             />
           ))}
