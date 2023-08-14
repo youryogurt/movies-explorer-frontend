@@ -64,7 +64,7 @@ function Movies(props) {
     setError(null);
 
     const moviesList = handleSearch(query);
-    setFoundMovies(moviesList);
+    // setFoundMovies(moviesList);
     setFoundMovies(short ? filterShortMovies(moviesList) : moviesList);
     localStorage.setItem("filtredmovies", JSON.stringify(moviesList));
     setIsLoading(false);

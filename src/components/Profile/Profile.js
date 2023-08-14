@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
 import useValidation from "../../hooks/useFormValidation.js";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
 function Profile(props) {
   const [isDisabled, setIsDisabled] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { values, handleChange, errors, isValid, resetForm } = useValidation({
     name: "",
@@ -23,10 +23,23 @@ function Profile(props) {
     setIsDisabled(isActiveButton);
   }, [values, currentUser, isValid]);
 
-  function handleSubmit(e) {
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   if (isValid) {
+  //     props.handleUpdateUser(values.name, values.email);
+  //   }
+  // }
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    if (isValid) {
-      props.handleUpdateUser(values.name, values.email);
+    if (!isSubmitting && isValid) {
+      setIsSubmitting(true);
+      try {
+        await props.handleUpdateUser(values.name, values.email);
+      } catch (error) {
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   }
   
@@ -71,10 +84,14 @@ function Profile(props) {
           <span className="form__error">{errors.email}</span>
         </label>
         <button
+          // className={`profile__button ${
+          //   !isValid && errors ? "profile__button_disabled" : ""
+          // }`}
           className={`profile__button ${
-            !isValid && errors ? "profile__button_disabled" : ""
+            !isValid || isSubmitting ? "profile__button_disabled" : ""
           }`}
-          disabled={!isValid || !isDisabled}
+          // disabled={!isValid || !isDisabled}
+          disabled={!isValid || !isDisabled || isSubmitting}
           type="submit"
         >
           Редактировать

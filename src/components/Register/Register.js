@@ -1,23 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useValidation from "../../hooks/useFormValidation.js";
 
 function Register(props) {
-  const { values, handleChange, errors, isValid, resetForm } =
-    useValidation({
-      name: "",
-      email: "",
-      password: "",
-    });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { values, handleChange, errors, isValid, resetForm } = useValidation({
+    name: "",
+    email: "",
+    password: "",
+  });
 
   useEffect(() => {
     resetForm({ name: "", email: "", password: "" });
   }, [resetForm]);
 
-  function handleSubmit(e) {
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   if (isValid) {
+  //     props.handleRegister(values.name, values.email, values.password);
+  //   }
+  // }
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    if (isValid) {
-      props.handleRegister(values.name, values.email, values.password);
+    if (!isSubmitting && isValid) {
+      setIsSubmitting(true);
+      try {
+        await props.handleRegister(values.name, values.email, values.password);
+      } catch (error) {
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   }
 
@@ -67,11 +80,15 @@ function Register(props) {
         <span className="form__error">{errors.password}</span>
       </label>
       <button
+        // className={`form__button ${
+        //   !isValid && errors ? "form__button_disabled" : ""
+        // }`}
         className={`form__button ${
-          !isValid && errors ? "form__button_disabled" : ""
+          !isValid || isSubmitting ? "form__button_disabled" : ""
         }`}
         type="submit"
-        disabled={!isValid}
+        // disabled={!isValid}
+        disabled={!isValid || isSubmitting}
       >
         Зарегистрироваться
       </button>

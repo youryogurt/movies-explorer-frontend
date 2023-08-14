@@ -32,6 +32,10 @@ function App() {
   const showFooterOnPages = ["/", "/movies", "/saved-movies"];
   const shouldShowFooter = showFooterOnPages.includes(location.pathname);
 
+  // отображаем хедер на страницах, где он не нужен
+  const showHeaderOnPages = ["/signin", "/signup", "/profile", "/", "/movies", "/saved-movies"];
+  const shouldShowHeader = showHeaderOnPages.includes(location.pathname);
+
   const navigate = useNavigate();
 
   // получение данных пользователя
@@ -107,6 +111,7 @@ function App() {
     localStorage.removeItem("shortfilms");
     localStorage.removeItem("filtredmovies");
     localStorage.removeItem("savedmovies");
+    localStorage.removeItem("movies");
     setLoggedIn(false);
     navigate("/");
   }
@@ -190,7 +195,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
-        <Header loggedIn={loggedIn} />
+        {shouldShowHeader && <Header loggedIn={loggedIn} />}
         {loading ? (
           <Preloader />
         ) : (

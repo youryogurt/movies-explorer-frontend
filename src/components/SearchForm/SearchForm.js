@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import search from "../../images/search-icon.svg";
 
@@ -17,6 +17,7 @@ function SearchForm(props) {
   // сабмит формы поиска
   function handleSubmit(e) {
     e.preventDefault();
+    localStorage.setItem("query", query);
     props.handleSearchFormSubmit(query);
   }
 
