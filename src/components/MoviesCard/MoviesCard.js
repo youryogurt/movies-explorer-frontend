@@ -11,8 +11,10 @@ function MoviesCard(props) {
   }`;
 
   function handleSaveMovie() {
+    console.log(!isSaved, "состояние сохранения до клика лайка");
     setIsSaved(!isSaved);
     props.onClick(props.movie, isSaved);
+    console.log(!isSaved, "состояние сохранения после клика лайка");
   }
 
   function handleDeleteMovie() {
@@ -58,6 +60,7 @@ function MoviesCard(props) {
       <img
         className="movies-card__image"
         src={`https://api.nomoreparties.co${props.movie.image.url}`}
+        // src={props.movie.image.url}
         alt={props.movie.nameRU}
         onClick={openTrailer}
       />
