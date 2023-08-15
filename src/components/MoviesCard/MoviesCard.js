@@ -12,7 +12,7 @@ function MoviesCard(props) {
 
   function handleSaveMovie() {
     setIsSaved(!isSaved);
-    props.onClick(props.movie);
+    props.onClick(props.movie, isSaved);
   }
 
   function handleDeleteMovie() {

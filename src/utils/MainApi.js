@@ -67,7 +67,7 @@ export class Api {
   }
 
   async changeSavedMovieStatus(movieId, isSaved) {
-    if (isSaved) {
+    if (!isSaved) {
       return await this.saveMovie(movieId);
     }
     return await this.deleteMovie(movieId)

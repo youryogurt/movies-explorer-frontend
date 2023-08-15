@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
+// import useValidation from "../../hooks/useFormValidation.js";
+
 // import { getMovies } from "../../utils/MoviesApi.js";
 
 function Movies(props) {
@@ -11,6 +13,8 @@ function Movies(props) {
 
   const [isLoading, setIsLoading] = useState(true); // состояние загрузки
   const [error, setError] = useState(null); // состояние ошибки
+
+  // const validation = useValidation();
 
   // получение списка фильмов
   // function getMoviesList() {
@@ -33,7 +37,7 @@ function Movies(props) {
   }
 
   // переключение чекбокса короткометражек
-  function handleShortMoviesCheckbox(checked) {
+  function handleShortMoviesCheckbox(checked, query) {
     setIsCheckbox(checked);
     if (!checked) {
       setFoundMovies(filterShortMovies(foundMovies));
@@ -41,6 +45,7 @@ function Movies(props) {
       setFoundMovies(foundMovies);
     }
     localStorage.setItem("shortfilms", checked);
+    handleFilterMovies(query, checked);
   }
 
   // установка положения чекбокса
@@ -84,7 +89,6 @@ function Movies(props) {
       setIsLoading(false);
     }
   }, []);
-
 
   return (
     <div>

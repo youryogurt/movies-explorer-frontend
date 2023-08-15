@@ -149,9 +149,9 @@ function App() {
   }, [loggedIn]);
 
   // сохранение/лайк фильму
-  function handleMovieLike(movie) {
+  function handleMovieLike(movie, isSaved) {
     api
-      .changeSavedMovieStatus(movie, true)
+      .changeSavedMovieStatus(movie, isSaved)
       .then((newMovie) => {
         setSavedMovies((state) => [...state, newMovie]);
         localStorage.setItem("savedmovies", JSON.stringify(newMovie));
@@ -209,6 +209,7 @@ function App() {
                   loggedIn={loggedIn}
                   userRequestDone={userRequestDone}
                   onClick={handleMovieLike}
+                  isSavedMovies={isSavedMovies}
                   // onDelete={handleMovieDelete}
                 />
               }
@@ -220,6 +221,7 @@ function App() {
                 <ProtectedRoute
                   element={SavedMovies}
                   loggedIn={loggedIn}
+                  // movies={movies}
                   userRequestDone={userRequestDone}
                   isSavedMovies={isSavedMovies}
                   // onClick={handleMovieLike}
