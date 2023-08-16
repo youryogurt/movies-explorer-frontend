@@ -98,7 +98,7 @@ function MoviesCardList(props) {
 
       {location.pathname === "/saved-movies" && (
         <ul className="movies-card-list">
-          {props.isSavedMovies.slice(0, shownMovies).map((movie) => (
+          {props.movies.slice(0, shownMovies).map((movie) => (
             <MoviesCard
               // key={props.isSavedFilms ? movie._id : movie.id}
               key={movie.id}
