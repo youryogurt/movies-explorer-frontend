@@ -108,12 +108,6 @@
   font-size: 12px;
   text-align: center;
   color: #EE3465;
-  margin-top: 14px;
-  display: none;
-}
-
-.search-form__error_visible {
-  display: block;
 }
 
 @media screen and (max-width: 1024px) {

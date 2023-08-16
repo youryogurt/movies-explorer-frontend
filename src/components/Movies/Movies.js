@@ -14,23 +14,6 @@ function Movies(props) {
   const [isLoading, setIsLoading] = useState(true); // состояние загрузки
   const [error, setError] = useState(null); // состояние ошибки
 
-  // const validation = useValidation();
-
-  // получение списка фильмов
-  // function getMoviesList() {
-  //   getMovies()
-  //     .then((res) => {
-  //       setFoundMovies(res);
-  //       setFilteredMovies(res);
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
-
-  // const movies = getMoviesList();
-
   // фильтрация фильмов (короткометражки)
   function filterShortMovies(foundMovies) {
     return foundMovies.filter((movie) => movie.duration <= 40);

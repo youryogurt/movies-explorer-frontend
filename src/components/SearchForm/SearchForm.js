@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import search from "../../images/search-icon.svg";
+// import useValidation from "../../hooks/useFormValidation.js";
 
 function SearchForm(props) {
+  const [isValid, setIsValid] = useState(true);
   const [query, setQuery] = useState(localStorage.getItem("query") || "");
 
   // фильтрация короткометражек
@@ -15,9 +17,14 @@ function SearchForm(props) {
     setQuery(e.target.value);
   }
 
+  function validate() {
+setIsValid(Boolean(query));
+  }
+
   // сабмит формы поиска
   function handleSubmit(e) {
     e.preventDefault();
+      validate();
       localStorage.setItem("query", query);
       props.handleSearchFormSubmit(query);
     }
@@ -34,7 +41,6 @@ function SearchForm(props) {
             value={query}
             placeholder="Фильм"
             className="search-input"
-            required
             onChange={handleChange}
           />
           <div className="search-form__items">
@@ -52,6 +58,7 @@ function SearchForm(props) {
           </div>
         </form>
       </div>
+      {!isValid && <span className="search-form__error">Нужно ввести ключевое слово</span>}
       <div className="search-form__mobile-checkbox">
         <FilterCheckbox
           className="search-form__checkbox"
@@ -61,7 +68,6 @@ function SearchForm(props) {
         />
       </div>
     </section>
-    {/* <p className="search-form__error search-form__error_visible">Нужно ввести ключевое слово</p> */}
     </>
   );
 }
