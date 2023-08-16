@@ -12,12 +12,14 @@ function MoviesCard(props) {
 
   function handleSaveMovie() {
     console.log(!isSaved, "состояние сохранения до клика лайка");
-    setIsSaved(!isSaved);
+    // setIsSaved(!isSaved);
     props.onClick(props.movie, isSaved);
+    setIsSaved(!isSaved);
     console.log(!isSaved, "состояние сохранения после клика лайка");
   }
 
   function handleDeleteMovie() {
+    console.log(props.movie, "данные карточки при удалении");
     props.onClick(props.movie);
   }
 

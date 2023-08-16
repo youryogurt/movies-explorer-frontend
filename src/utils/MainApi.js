@@ -66,11 +66,11 @@ export class Api {
     return await this._fetch(`movies/${movie}`, 'DELETE');
   }
 
-  async changeSavedMovieStatus(movieId, isSaved) {
+  async changeSavedMovieStatus(movie, isSaved) {
     if (!isSaved) {
-      return await this.saveMovie(movieId);
+      return await this.saveMovie(movie);
     }
-    return await this.deleteMovie(movieId)
+    return await this.deleteMovie(movie)
   }
 }
 
