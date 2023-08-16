@@ -17,6 +17,7 @@ import { getMovies } from "../../utils/MoviesApi.js";
 import * as AuthApi from "../../utils/Auth.js";
 import api from "../../utils/MainApi.js";
 import Preloader from "../Preloader/Preloader";
+import { type } from "@testing-library/user-event/dist/type";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -24,7 +25,8 @@ function App() {
   const [movies, setMovies] = useState([]); // стейт для списка фильмов
   const [isSavedMovies, setSavedMovies] = useState([]); // стейт для сохраненных фильмов
   const [userRequestDone, setUserRequestDone] = useState(true);
-
+  const [registrationError, setRegistrationError] = useState("");
+  const [loginError, setLoginError] = useState("");
   const [loading, setLoading] = useState(true);
 
   // прячем футер на страницах, где он не нужен
@@ -64,20 +66,24 @@ function App() {
         navigate("/movies");
       })
       .catch((err) => {
-        console.log(err);
+        setLoginError(err);
       });
   }
 
+  useEffect(() => {
+      getMainData();
+  }, []);
+
   // обработчик регистрации
   function handleRegister(name, email, password) {
+    setRegistrationError("");
     AuthApi.register(name, email, password)
       .then((res) => {
         handleLogin(email, password);
       })
       .catch((err) => {
-        console.log(err);
+        setRegistrationError(err);
       });
-    console.log(name, email, password);
   }
 
   // проверка токена
@@ -258,12 +264,12 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route
               path="/signin"
-              element={<Login handleLogin={handleLogin} />}
+              element={<Login handleLogin={handleLogin} error={loginError} />}
             />
 
             <Route
               path="/signup"
-              element={<Register handleRegister={handleRegister} />}
+              element={<Register handleRegister={handleRegister} error={registrationError} />}
             />
 
             <Route path="/*" element={<NotFound />} />

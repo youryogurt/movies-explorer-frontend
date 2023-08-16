@@ -13,12 +13,6 @@ function Login(props) {
     resetForm({ email: "", password: "" });
   }, [resetForm]);
 
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   if (isValid) {
-  //     props.handleLogin(values.email, values.password);
-  //   }
-  // }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -65,6 +59,7 @@ function Login(props) {
         />
         <span className="form__error">{errors.password}</span>
       </label>
+      {props.error && <span className="form__error">{props.error}</span>}
       <button
         // className={`form__button ${
         //   !isValid && errors ? "form__button_disabled" : ""

@@ -18,7 +18,11 @@ function useValidation() {
         setIsValid(newIsValid);
     }, [setValues, setErrors, setIsValid]);
 
-    return {values, handleChange, errors, isValid, resetForm, setValues, setIsValid};
+    const setError = (name, message) => {
+        setErrors({...errors, [name]: message});
+    };
+
+    return {values, handleChange, errors, isValid, resetForm, setValues, setIsValid, setError};
 }
 
 export default useValidation;

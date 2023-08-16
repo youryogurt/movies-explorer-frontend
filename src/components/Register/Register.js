@@ -14,20 +14,12 @@ function Register(props) {
     resetForm({ name: "", email: "", password: "" });
   }, [resetForm]);
 
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   if (isValid) {
-  //     props.handleRegister(values.name, values.email, values.password);
-  //   }
-  // }
-
   async function handleSubmit(e) {
     e.preventDefault();
     if (!isSubmitting && isValid) {
       setIsSubmitting(true);
       try {
         await props.handleRegister(values.name, values.email, values.password);
-      } catch (error) {
       } finally {
         setIsSubmitting(false);
       }
@@ -79,6 +71,7 @@ function Register(props) {
         />
         <span className="form__error">{errors.password}</span>
       </label>
+      {props.error && <span className="form__error">{props.error}</span>}
       <button
         // className={`form__button ${
         //   !isValid && errors ? "form__button_disabled" : ""
