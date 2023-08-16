@@ -14,8 +14,6 @@ function Movies(props) {
   const [isLoading, setIsLoading] = useState(true); // состояние загрузки
   const [error, setError] = useState(null); // состояние ошибки
 
-  const [newQuery, setNewQuery] = useState(""); // запрос на поиск фильмов
-
   // const validation = useValidation();
 
   // получение списка фильмов
@@ -89,7 +87,7 @@ function Movies(props) {
       setFoundMovies(moviesList);
       setFoundMovies(isCheckbox ? filterShortMovies(moviesList) : moviesList);
       setIsLoading(false);
-      setNewQuery(localStorage.getItem("query"));
+
     }
   }, []);
 

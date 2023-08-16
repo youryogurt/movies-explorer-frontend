@@ -3,7 +3,7 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import search from "../../images/search-icon.svg";
 
 function SearchForm(props) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(localStorage.getItem("query") || "");
 
   // фильтрация короткометражек
   function handleShortChange(e) {
@@ -11,6 +11,7 @@ function SearchForm(props) {
   }
 
   function handleChange(e) {
+    localStorage.setItem("query", e.target.value);
     setQuery(e.target.value);
   }
 
