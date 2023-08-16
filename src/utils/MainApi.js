@@ -67,10 +67,11 @@ export class Api {
   }
 
   async changeSavedMovieStatus(movie, isSaved) {
+    console.log(movie)
     if (!isSaved) {
       return await this.saveMovie(movie);
     }
-    return await this.deleteMovie(movie.id)
+    return await this.deleteMovie(movie.movieId)
   }
 }
 

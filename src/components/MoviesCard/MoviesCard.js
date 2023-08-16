@@ -2,20 +2,18 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 function MoviesCard(props) {
-  const [isSaved, setIsSaved] = useState(false);
   
   const location = useLocation();
 
   const cardSaveButtonClassName = `movies-card__unsave-film-button ${
-    isSaved && "movies-card__save-film-button"
+    props.isSaved && "movies-card__save-film-button"
   }`;
 
   function handleSaveMovie() {
-    console.log(!isSaved, "состояние сохранения до клика лайка");
+    console.log(!props.isSaved, "состояние сохранения до клика лайка");
     // setIsSaved(!isSaved);
-    props.onClick(props.movie, isSaved);
-    setIsSaved(!isSaved);
-    console.log(!isSaved, "состояние сохранения после клика лайка");
+    props.onClick({ ...props.movie, movieId: props.savedId }, props.isSaved);
+    console.log(!props.isSaved, "состояние сохранения после клика лайка");
   }
 
   function handleDeleteMovie() {
@@ -61,7 +59,7 @@ function MoviesCard(props) {
       </div>
       <img
         className="movies-card__image"
-        src={`https://api.nomoreparties.co${props.movie.image.url}`}
+        src={location.pathname === "/saved-movies" ? props.movie.image : `https://api.nomoreparties.co${props.movie.image.url}`}
         // src={props.movie.image.url}
         alt={props.movie.nameRU}
         onClick={openTrailer}

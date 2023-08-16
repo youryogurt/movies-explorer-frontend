@@ -52,7 +52,7 @@ function Movies(props) {
 
   // установка положения чекбокса
   useEffect(() => {
-    console.log(localStorage.getItem("shortfilms"))
+    console.log(localStorage.getItem("shortfilms"));
     setIsCheckbox(localStorage.getItem("shortfilms") === "true");
   }, []);
 
@@ -81,7 +81,7 @@ function Movies(props) {
     localStorage.setItem("shortfilms", isCheckbox);
     handleFilterMovies(query, isCheckbox);
   }
- 
+
   // отрисовка тех фильмов, которые я искала ранее, при перезагрузке страницы
   useEffect(() => {
     if (localStorage.getItem("filtredmovies")) {
@@ -111,8 +111,9 @@ function Movies(props) {
         <p className="movies__error">Ничего не найдено</p>
       ) : (
         <MoviesCardList
-        movies={foundMovies}
-        onClick={props.onClick}
+          isSavedMovies={props.isSavedMovies}
+          movies={foundMovies}
+          onClick={props.onClick}
         />
       )}
     </div>
