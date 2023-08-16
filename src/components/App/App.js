@@ -153,9 +153,9 @@ function App() {
   // сохранение/лайк фильму
   function handleMovieLike(movie, isSaved) {
     console.log(isSavedMovies, "получаем сохраненные фильмы до лайка");
-    Promise.all([api.changeSavedMovieStatus(movie, isSaved), api.getSavedMovies()])
-    // api
-    //   .changeSavedMovieStatus(movie, isSaved)
+    // Promise.all([api.changeSavedMovieStatus(movie, isSaved), api.getSavedMovies()])
+    api
+      .changeSavedMovieStatus(movie, isSaved)
       .then((newMovie) => {
         setSavedMovies((state) => [...state, newMovie]);
         localStorage.setItem("savedmovies", JSON.stringify(newMovie));
@@ -169,9 +169,9 @@ function App() {
   // удаление фильма
   function handleMovieDelete(movie) {
     console.log(isSavedMovies, "получаем сохраненные фильмы до удаления");
-    Promise.all([api.deleteMovie(movie._id), api.getSavedMovies()])
-    // api
-    //   .deleteMovie(movie._id, false)
+    // Promise.all([api.deleteMovie(movie._id), api.getSavedMovies()])
+    api
+      .deleteMovie(movie._id, false)
       .then(() => {
         setSavedMovies((state) => state.filter((c) => c._id !== movie._id));
         console.log(isSavedMovies, "получаем сохраненные фильмы после удаления");

@@ -70,7 +70,7 @@ export class Api {
     if (!isSaved) {
       return await this.saveMovie(movie);
     }
-    return await this.deleteMovie(movie)
+    return await this.deleteMovie(movie.id)
   }
 }
 
