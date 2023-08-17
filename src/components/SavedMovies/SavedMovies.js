@@ -28,10 +28,10 @@ function SavedMovies(props) {
   }
 
   // установка положения чекбокса
-  useEffect(() => {
-    console.log(localStorage.getItem("shortfilms"));
-    setIsCheckbox(localStorage.getItem("shortfilms") === "true");
-  }, []);
+  // useEffect(() => {
+  //   console.log(localStorage.getItem("shortfilms"));
+  //   setIsCheckbox(localStorage.getItem("shortfilms") === "true");
+  // }, []);
 
   // поиск фильмов
   function handleSearch(query) {
