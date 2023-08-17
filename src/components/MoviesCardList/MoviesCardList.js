@@ -41,21 +41,25 @@ function MoviesCardList(props) {
     getShownMovies();
   }, []);
 
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     window.addEventListener("resize", getShownMovies);
+  //   }, 1000);
+  // });
+
   useEffect(() => {
-    setTimeout(() => {
+    // добавляем обработчик события resize с задержкой при монтировании
+    const resizeTimeout = setTimeout(() => {
       window.addEventListener("resize", getShownMovies);
     }, 1000);
-  });
-
-  // function getSavedMovies(isSavedMovies, movie) {
-  //   return isSavedMovies.find((savedMovie) => savedMovie.movieId === movie.id);
-  // }
-
-  // просто функция-пустышка пока что
-  function getSavedMovies() {
-    console.log("hi");
-    // return localStorage.getItem("savedmovies");
-  }
+    // функция, которая будет вызвана при размонтировании компонента
+    return () => {
+      // удаляем обработчик события resize при размонтировании
+      window.removeEventListener("resize", getShownMovies);
+      // очищаем timeout при размонтировании, чтобы избежать утечек памяти
+      clearTimeout(resizeTimeout);
+    };
+  }, []);
 
   return (
     <section className="movies-card-list-section">
@@ -79,7 +83,6 @@ function MoviesCardList(props) {
                       // saved={props.isSavedMovies}
                       // saved={getSavedMovies(props.savedMovies, movie)}
                       onClick={props.onClick}
-                      // onDelete={props.onDelete}
                   />
               )
             })}
