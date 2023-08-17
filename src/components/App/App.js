@@ -27,6 +27,7 @@ function App() {
   const [userRequestDone, setUserRequestDone] = useState(true);
   const [registrationError, setRegistrationError] = useState("");
   const [loginError, setLoginError] = useState("");
+  const [profileError, setProfileError] = useState("");
   const [loading, setLoading] = useState(true);
 
   // прячем футер на страницах, где он не нужен
@@ -35,7 +36,14 @@ function App() {
   const shouldShowFooter = showFooterOnPages.includes(location.pathname);
 
   // отображаем хедер на страницах, где он не нужен
-  const showHeaderOnPages = ["/signin", "/signup", "/profile", "/", "/movies", "/saved-movies"];
+  const showHeaderOnPages = [
+    "/signin",
+    "/signup",
+    "/profile",
+    "/",
+    "/movies",
+    "/saved-movies",
+  ];
   const shouldShowHeader = showHeaderOnPages.includes(location.pathname);
 
   const navigate = useNavigate();
@@ -46,7 +54,6 @@ function App() {
       .then(([currentUser, isSavedMovies]) => {
         setCurrentUser(currentUser);
         setSavedMovies(isSavedMovies);
-        // console.log(currentUser);
         console.log(isSavedMovies);
       })
       .catch((err) => {
@@ -71,7 +78,7 @@ function App() {
   }
 
   useEffect(() => {
-      getMainData();
+    getMainData();
   }, []);
 
   // обработчик регистрации
@@ -158,7 +165,7 @@ function App() {
 
   // сохранение/лайк фильму
   function handleMovieLike(movie, isSaved) {
-    console.log(movie, isSaved)
+    console.log(movie, isSaved);
     console.log(isSavedMovies, "получаем сохраненные фильмы до лайка");
     // Promise.all([api.changeSavedMovieStatus(movie, isSaved), api.getSavedMovies()])
     api
@@ -166,12 +173,12 @@ function App() {
       .then((newMovie) => {
         setSavedMovies((state) => [...state, newMovie]);
         localStorage.setItem("savedmovies", JSON.stringify(newMovie));
-        getSavedMoviesList()
+        getSavedMoviesList();
       })
       .catch((err) => {
         console.log(err);
       });
-      console.log(isSavedMovies, "получаем сохраненные фильмы сразу после лайка");
+    console.log(isSavedMovies, "получаем сохраненные фильмы сразу после лайка");
   }
 
   // удаление фильма
@@ -182,7 +189,10 @@ function App() {
       .deleteMovie(movie._id, false)
       .then(() => {
         setSavedMovies((state) => state.filter((c) => c._id !== movie._id));
-        console.log(isSavedMovies, "получаем сохраненные фильмы после удаления");
+        console.log(
+          isSavedMovies,
+          "получаем сохраненные фильмы после удаления"
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -257,11 +267,13 @@ function App() {
                   handleUpdateUser={handleUpdateUser}
                   userRequestDone={userRequestDone}
                   currentUser={currentUser}
+                  error={profileError}
                 />
               }
             />
 
             <Route path="/" element={<Main />} />
+            
             <Route
               path="/signin"
               element={<Login handleLogin={handleLogin} error={loginError} />}
@@ -269,7 +281,12 @@ function App() {
 
             <Route
               path="/signup"
-              element={<Register handleRegister={handleRegister} error={registrationError} />}
+              element={
+                <Register
+                  handleRegister={handleRegister}
+                  error={registrationError}
+                />
+              }
             />
 
             <Route path="/*" element={<NotFound />} />

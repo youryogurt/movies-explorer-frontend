@@ -23,13 +23,6 @@ function Profile(props) {
     setIsDisabled(isActiveButton);
   }, [values, currentUser, isValid]);
 
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   if (isValid) {
-  //     props.handleUpdateUser(values.name, values.email);
-  //   }
-  // }
-
   async function handleSubmit(e) {
     e.preventDefault();
     if (!isSubmitting && isValid) {
@@ -83,6 +76,7 @@ function Profile(props) {
           />
           <span className="form__error">{errors.email}</span>
         </label>
+        {props.error && <span className="form__error">{props.error}</span>}
         <button
           // className={`profile__button ${
           //   !isValid && errors ? "profile__button_disabled" : ""
