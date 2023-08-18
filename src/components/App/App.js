@@ -280,21 +280,6 @@ function App() {
 
             <Route
               path="/signin"
-              element={<Login handleLogin={handleLogin} error={loginError} />}
-            />
-
-            <Route
-              path="/signup"
-              element={
-                <Register
-                  handleRegister={handleRegister}
-                  error={registrationError}
-                />
-              }
-            />
-
-            {/* <Route
-              path="/signin"
               element={
                 <RedirectIfLoggedIn
                   element={Login}
@@ -315,7 +300,7 @@ function App() {
                   error={registrationError}
                 />
               }
-            /> */}
+            />
 
             <Route path="/*" element={<NotFound />} />
           </Routes>

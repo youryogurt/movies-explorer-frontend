@@ -86,7 +86,7 @@ function Register(props) {
         }`}
         type="submit"
         // disabled={isSubmitting}
-        disabled={!isValid || true}
+        disabled={!isValid || isSubmitting}
       >
         Зарегистрироваться
       </button>

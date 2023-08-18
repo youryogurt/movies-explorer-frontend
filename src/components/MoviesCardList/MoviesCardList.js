@@ -67,24 +67,26 @@ function MoviesCardList(props) {
         <>
           <ul className="movies-card-list">
             {props.movies.slice(0, shownMovies).map((movie) => {
-              const isSaved = props.isSavedMovies.find(({ movieId }) => movieId === movie.id);
-              console.log(props.isSavedMovies)
+              const isSaved = props.isSavedMovies.find(
+                ({ movieId }) => movieId === movie.id
+              );
+              console.log(props.isSavedMovies);
               return (
-                  <MoviesCard
-                      key={props.isSavedFilms ? movie._id : movie.id}
-                      movie={movie}
-                      isSavedMovies={props.isSavedMovies}
-                      savedMovies={props.savedMovies}
-                      onCardClick={props.onCardClick}
-                      onCardSave={props.onCardSave}
-                      savedId={isSaved?._id}
-                      isSaved={!!isSaved}
-                      setIsSaved={setIsSaved}
-                      // saved={props.isSavedMovies}
-                      // saved={getSavedMovies(props.savedMovies, movie)}
-                      onClick={props.onClick}
-                  />
-              )
+                <MoviesCard
+                  key={props.isSavedFilms ? movie._id : movie.id}
+                  movie={movie}
+                  isSavedMovies={props.isSavedMovies}
+                  savedMovies={props.savedMovies}
+                  onCardClick={props.onCardClick}
+                  onCardSave={props.onCardSave}
+                  savedId={isSaved?._id}
+                  isSaved={!!isSaved}
+                  setIsSaved={setIsSaved}
+                  // saved={props.isSavedMovies}
+                  // saved={getSavedMovies(props.savedMovies, movie)}
+                  onClick={props.onClick}
+                />
+              );
             })}
           </ul>
           {props.movies.length > shownMovies && (
