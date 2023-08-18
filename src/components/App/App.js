@@ -10,6 +10,7 @@ import Login from "../Login/Login";
 import NotFound from "../NotFound/NotFound";
 import Footer from "../Footer/Footer";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import RedirectIfLoggedIn from "../RedirectIfLoggedIn/RedirectIfLoggedIn";
 import { React, useState, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
@@ -28,7 +29,9 @@ function App() {
   const [registrationError, setRegistrationError] = useState("");
   const [loginError, setLoginError] = useState("");
   const [profileError, setProfileError] = useState("");
+  const [successProfileEditing, setSuccessProfileEditing] = useState(false);
   const [loading, setLoading] = useState(true);
+  console.log("Saved app", isSavedMovies);
 
   // прячем футер на страницах, где он не нужен
   const location = useLocation();
@@ -138,9 +141,10 @@ function App() {
       .setUserInfo(updatedUser)
       .then((res) => {
         setCurrentUser(res);
+        setSuccessProfileEditing(true);
       })
       .catch((err) => {
-        console.log(err);
+        setProfileError(err);
       });
   }
 
@@ -184,7 +188,6 @@ function App() {
   // удаление фильма
   function handleMovieDelete(movie) {
     console.log(isSavedMovies, "получаем сохраненные фильмы до удаления");
-    // Promise.all([api.deleteMovie(movie._id), api.getSavedMovies()])
     api
       .deleteMovie(movie._id, false)
       .then(() => {
@@ -268,12 +271,13 @@ function App() {
                   userRequestDone={userRequestDone}
                   currentUser={currentUser}
                   error={profileError}
+                  successProfileEditing={successProfileEditing}
                 />
               }
             />
 
             <Route path="/" element={<Main />} />
-            
+
             <Route
               path="/signin"
               element={<Login handleLogin={handleLogin} error={loginError} />}
@@ -288,6 +292,30 @@ function App() {
                 />
               }
             />
+
+            {/* <Route
+              path="/signin"
+              element={
+                <RedirectIfLoggedIn
+                  element={Login}
+                  loggedIn={loggedIn}
+                  handleLogin={handleLogin}
+                  error={loginError}
+                />
+              }
+            />
+
+            <Route
+              path="/signup"
+              element={
+                <RedirectIfLoggedIn
+                  loggedIn={loggedIn}
+                  element={Register}
+                  handleRegister={handleRegister}
+                  error={registrationError}
+                />
+              }
+            /> */}
 
             <Route path="/*" element={<NotFound />} />
           </Routes>

@@ -6,10 +6,11 @@ import Preloader from "../Preloader/Preloader";
 function SavedMovies(props) {
   const [foundMovies, setFoundMovies] = useState(props.isSavedMovies); // массив найденных фильмов по запросу
   const [isCheckbox, setIsCheckbox] = useState(false); // состояние чекбокса короткометражек
-
+  
   const [isLoading, setIsLoading] = useState(true); // состояние загрузки
   const [error, setError] = useState(null); // состояние ошибки
-
+  
+  const saveSearchQuery = false;
   // фильтрация фильмов (короткометражки)
   function filterShortMovies(foundMovies) {
     return foundMovies.filter((movie) => movie.duration <= 40);
@@ -23,15 +24,12 @@ function SavedMovies(props) {
     } else {
       setFoundMovies(foundMovies);
     }
-    localStorage.setItem("shortfilms", checked);
     handleFilterMovies(query, checked);
   }
-
-  // установка положения чекбокса
-  // useEffect(() => {
-  //   console.log(localStorage.getItem("shortfilms"));
-  //   setIsCheckbox(localStorage.getItem("shortfilms") === "true");
-  // }, []);
+  
+  useEffect(() => {
+    setFoundMovies(props.isSavedMovies);
+  }, [props.isSavedMovies]);
 
   // поиск фильмов
   function handleSearch(query) {
@@ -54,16 +52,14 @@ function SavedMovies(props) {
     setError(null);
 
     const moviesList = handleSearch(query);
-    // setFoundMovies(moviesList);
     setFoundMovies(short ? filterShortMovies(moviesList) : moviesList);
-    localStorage.setItem("filtredmovies", JSON.stringify(moviesList));
     setIsLoading(false);
   }
 
   function handleSearchFormSubmit(query) {
-    localStorage.setItem("shortfilms", isCheckbox);
     handleFilterMovies(query, isCheckbox);
   }
+  console.log("saved movies", foundMovies);
 
   return (
     <div className="saved-movies__section">
@@ -71,6 +67,7 @@ function SavedMovies(props) {
         handleSearchFormSubmit={handleSearchFormSubmit}
         isCheckbox={isCheckbox}
         onCheckbox={handleShortMoviesCheckbox}
+        saveSearchQuery={saveSearchQuery}
       />
       {/* {isLoading ? (
         <Preloader />

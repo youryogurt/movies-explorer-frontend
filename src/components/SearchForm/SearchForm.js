@@ -5,7 +5,8 @@ import search from "../../images/search-icon.svg";
 
 function SearchForm(props) {
   const [isValid, setIsValid] = useState(true);
-  const [query, setQuery] = useState(localStorage.getItem("query") || "");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [query, setQuery] = useState(props.saveSearchQuery ? localStorage.getItem("query") || "": "");
 
   // фильтрация короткометражек
   function handleShortChange(e) {
@@ -13,7 +14,9 @@ function SearchForm(props) {
   }
 
   function handleChange(e) {
-    localStorage.setItem("query", e.target.value);
+    if (props.saveSearchQuery) {
+      localStorage.setItem("query", e.target.value);
+    };
     setQuery(e.target.value);
   }
 
@@ -22,11 +25,15 @@ setIsValid(Boolean(query));
   }
 
   // сабмит формы поиска
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    setIsSubmitting(true);
       validate();
-      localStorage.setItem("query", query);
-      props.handleSearchFormSubmit(query);
+      if (props.saveSearchQuery) {
+        localStorage.setItem("query", query);
+      };
+      await props.handleSearchFormSubmit(query);
+      setIsSubmitting(false);
     }
 
   return (
@@ -44,7 +51,7 @@ setIsValid(Boolean(query));
             onChange={handleChange}
           />
           <div className="search-form__items">
-            <button type="submit" className="search-form__button"></button>
+            <button type="submit" className="search-form__button" disabled={isSubmitting}></button>
             <div className="search-form__line"></div>
             <FilterCheckbox
               className="search-form__checkbox"
@@ -54,7 +61,7 @@ setIsValid(Boolean(query));
             />
           </div>
           <div className="search-form__items_mobile">
-            <button type="submit" className="search-form__button"></button>
+            <button type="submit" className="search-form__button" disabled={isSubmitting}></button>
           </div>
         </form>
       </div>

@@ -15,16 +15,21 @@ function Register(props) {
   }, [resetForm]);
 
   async function handleSubmit(e) {
+    console.log("значение до сабмита", isSubmitting);
     e.preventDefault();
     if (!isSubmitting && isValid) {
       setIsSubmitting(true);
+      console.log("значение перед сабмитом", isSubmitting);
       try {
         await props.handleRegister(values.name, values.email, values.password);
       } finally {
+        console.log("in finally");
         setIsSubmitting(false);
       }
     }
   }
+
+  console.log("значение вне", isSubmitting);
 
   return (
     <form className="login__section" onSubmit={handleSubmit}>
@@ -80,8 +85,8 @@ function Register(props) {
           !isValid || isSubmitting ? "form__button_disabled" : ""
         }`}
         type="submit"
-        // disabled={!isValid}
-        disabled={!isValid || isSubmitting}
+        // disabled={isSubmitting}
+        disabled={!isValid || true}
       >
         Зарегистрироваться
       </button>

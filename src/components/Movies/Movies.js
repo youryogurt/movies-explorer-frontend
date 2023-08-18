@@ -3,13 +3,12 @@ import React, { useState, useEffect } from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
-// import useValidation from "../../hooks/useFormValidation.js";
-
-// import { getMovies } from "../../utils/MoviesApi.js";
 
 function Movies(props) {
   const [foundMovies, setFoundMovies] = useState([]); // массив найденных фильмов по запросу
   const [isCheckbox, setIsCheckbox] = useState(false); // состояние чекбокса короткометражек
+  
+  const saveSearchQuery = true;
 
   const [isLoading, setIsLoading] = useState(true); // состояние загрузки
   const [error, setError] = useState(null); // состояние ошибки
@@ -22,11 +21,6 @@ function Movies(props) {
   // переключение чекбокса короткометражек
   function handleShortMoviesCheckbox(checked, query) {
     setIsCheckbox(checked);
-    if (!checked) {
-      setFoundMovies(filterShortMovies(foundMovies));
-    } else {
-      setFoundMovies(foundMovies);
-    }
     localStorage.setItem("shortfilms", checked);
     handleFilterMovies(query, checked);
   }
@@ -35,7 +29,7 @@ function Movies(props) {
   useEffect(() => {
     console.log(localStorage.getItem("shortfilms"));
     setIsCheckbox(localStorage.getItem("shortfilms") === "true");
-  }, []);
+    }, []);
 
   // поиск фильмов
   function handleSearch(query) {
@@ -53,8 +47,9 @@ function Movies(props) {
 
     const moviesList = handleSearch(query);
     // setFoundMovies(moviesList);
+    console.log("all list", moviesList);
     setFoundMovies(short ? filterShortMovies(moviesList) : moviesList);
-    localStorage.setItem("filtredmovies", JSON.stringify(moviesList));
+    localStorage.setItem("filtredmovies", short ? JSON.stringify(filterShortMovies(moviesList)) : JSON.stringify(moviesList));
     setIsLoading(false);
   }
 
@@ -70,7 +65,6 @@ function Movies(props) {
       setFoundMovies(moviesList);
       setFoundMovies(isCheckbox ? filterShortMovies(moviesList) : moviesList);
       setIsLoading(false);
-
     }
   }, []);
 
@@ -80,6 +74,7 @@ function Movies(props) {
         handleSearchFormSubmit={handleSearchFormSubmit}
         isCheckbox={isCheckbox}
         onCheckbox={handleShortMoviesCheckbox}
+        saveSearchQuery
       />
       {isLoading ? (
         <Preloader />

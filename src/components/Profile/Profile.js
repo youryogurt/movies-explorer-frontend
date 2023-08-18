@@ -20,7 +20,7 @@ function Profile(props) {
   useEffect(() => {
     let isActiveButton =
       currentUser.name !== values.name || currentUser.email !== values.email;
-    setIsDisabled(isActiveButton);
+    setIsDisabled(!isActiveButton);
   }, [values, currentUser, isValid]);
 
   async function handleSubmit(e) {
@@ -77,15 +77,16 @@ function Profile(props) {
           <span className="form__error">{errors.email}</span>
         </label>
         {props.error && <span className="form__error">{props.error}</span>}
+        {props.successProfileEditing && <span className="form__success">Данные успешно обновлены</span>}
         <button
           // className={`profile__button ${
           //   !isValid && errors ? "profile__button_disabled" : ""
           // }`}
           className={`profile__button ${
-            !isValid || isSubmitting ? "profile__button_disabled" : ""
+            !isValid || isDisabled || isSubmitting ? "profile__button_disabled" : ""
           }`}
           // disabled={!isValid || !isDisabled}
-          disabled={!isValid || !isDisabled || isSubmitting}
+          disabled={!isValid || isDisabled || isSubmitting}
           type="submit"
         >
           Редактировать
