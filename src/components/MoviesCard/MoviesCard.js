@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 function MoviesCard(props) {
-  
+  const [isDeleting, setIsDeleting] = useState(false);
   const location = useLocation();
 
   const cardSaveButtonClassName = `movies-card__unsave-film-button ${
@@ -16,9 +16,11 @@ function MoviesCard(props) {
     console.log(!props.isSaved, "состояние сохранения после клика лайка");
   }
 
-  function handleDeleteMovie() {
+  async function handleDeleteMovie() {
     console.log(props.movie, "данные карточки при удалении");
-    props.onClick(props.movie);
+    setIsDeleting(true);
+    await props.onClick(props.movie);
+    setIsDeleting(false);
   }
 
   function convertDuration(duration) {
@@ -51,7 +53,7 @@ function MoviesCard(props) {
           <button
           className="movies-card__delete-film-button"
           type="button"
-          // onClick={handleSaveMovie}
+          disabled={isDeleting}
           onClick={handleDeleteMovie}
         ></button>
         )}

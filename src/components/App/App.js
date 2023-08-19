@@ -192,7 +192,7 @@ function App() {
   // удаление фильма
   function handleMovieDelete(movie) {
     console.log(isSavedMovies, "получаем сохраненные фильмы до удаления");
-    api
+    return api
       .deleteMovie(movie._id, false)
       .then(() => {
         setSavedMovies((state) => state.filter((c) => c._id !== movie._id));
