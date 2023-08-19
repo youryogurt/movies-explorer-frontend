@@ -70,7 +70,7 @@ function MoviesCardList(props) {
               const isSaved = props.isSavedMovies.find(
                 ({ movieId }) => movieId === movie.id
               );
-              console.log(props.isSavedMovies);
+              // console.log(props.isSavedMovies);
               return (
                 <MoviesCard
                   key={props.isSavedFilms ? movie._id : movie.id}

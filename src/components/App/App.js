@@ -169,20 +169,24 @@ function App() {
 
   // сохранение/лайк фильму
   function handleMovieLike(movie, isSaved) {
-    console.log(movie, isSaved);
-    console.log(isSavedMovies, "получаем сохраненные фильмы до лайка");
-    // Promise.all([api.changeSavedMovieStatus(movie, isSaved), api.getSavedMovies()])
     api
       .changeSavedMovieStatus(movie, isSaved)
       .then((newMovie) => {
-        setSavedMovies((state) => [...state, newMovie]);
-        localStorage.setItem("savedmovies", JSON.stringify(newMovie));
-        getSavedMoviesList();
+        let updatedSavedMovies = [];
+        if (isSaved) {
+          updatedSavedMovies = isSavedMovies.filter(
+            (c) => c.movieId !== movie.id
+          );
+        } else {
+          updatedSavedMovies = [...isSavedMovies, newMovie];
+        }
+    
+        setSavedMovies(updatedSavedMovies);
+        localStorage.setItem("savedmovies", JSON.stringify(updatedSavedMovies));
       })
       .catch((err) => {
         console.log(err);
       });
-    console.log(isSavedMovies, "получаем сохраненные фильмы сразу после лайка");
   }
 
   // удаление фильма

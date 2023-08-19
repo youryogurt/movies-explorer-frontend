@@ -6,7 +6,7 @@ function Profile(props) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { values, handleChange, errors, isValid, resetForm } = useValidation({
+  const { values, handleChange, errors, isValid, resetForm, touched, setTouched } = useValidation({
     name: "",
     email: "",
   });
@@ -25,6 +25,7 @@ function Profile(props) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setTouched(false);
     if (!isSubmitting && isValid) {
       setIsSubmitting(true);
       try {
@@ -76,16 +77,12 @@ function Profile(props) {
           />
           <span className="form__error">{errors.email}</span>
         </label>
-        {props.error && <span className="form__error">{props.error}</span>}
-        {props.successProfileEditing && <span className="form__success">Данные успешно обновлены</span>}
+        {!touched && props.error && <span className="form__error">{props.error}</span>}
+        {!touched && props.successProfileEditing && <span className="form__success">Данные успешно обновлены</span>}
         <button
-          // className={`profile__button ${
-          //   !isValid && errors ? "profile__button_disabled" : ""
-          // }`}
           className={`profile__button ${
             !isValid || isDisabled || isSubmitting ? "profile__button_disabled" : ""
           }`}
-          // disabled={!isValid || !isDisabled}
           disabled={!isValid || isDisabled || isSubmitting}
           type="submit"
         >
