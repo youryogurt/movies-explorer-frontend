@@ -1,16 +1,14 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function NotFound() {
-  const location = useLocation();
+  const navigate = useNavigate();
   
   return (
     <section className="not-found__section">
       <h2 className="not-found__header">404</h2>
       <p className="not-found__text">Страница не найдена</p>
-      <Link className="not-found__link-back" to={location.state?.from || "/"}>
-        Назад
-      </Link>
+      <button className="not-found__link-back" onClick={() => navigate(-1)}>Назад</button>
     </section>
   );
 }

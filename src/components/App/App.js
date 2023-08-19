@@ -66,7 +66,7 @@ function App() {
 
   // обработчик авторизации
   function handleLogin(email, password) {
-    AuthApi.login(email, password)
+    return AuthApi.login(email, password)
       .then((data) => {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
@@ -87,7 +87,7 @@ function App() {
   // обработчик регистрации
   function handleRegister(name, email, password) {
     setRegistrationError("");
-    AuthApi.register(name, email, password)
+    return AuthApi.register(name, email, password)
       .then((res) => {
         handleLogin(email, password);
       })
@@ -137,7 +137,7 @@ function App() {
   // обработчик обновления данных пользователя
   function handleUpdateUser(name, email) {
     const updatedUser = { name, email };
-    api
+    return api
       .setUserInfo(updatedUser)
       .then((res) => {
         setCurrentUser(res);
