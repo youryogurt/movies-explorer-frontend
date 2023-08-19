@@ -5,8 +5,9 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 function Profile(props) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
 
-  const { values, handleChange, errors, isValid, resetForm, touched, setTouched } = useValidation({
+  const { values, handleChange, errors, isValid, resetForm } = useValidation({
     name: "",
     email: "",
   });
@@ -25,7 +26,7 @@ function Profile(props) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setTouched(false);
+    setShowFeedback(true);
     if (!isSubmitting && isValid) {
       setIsSubmitting(true);
       try {
@@ -51,7 +52,10 @@ function Profile(props) {
           <input
             className="profile__input"
             required
-            onChange={handleChange}
+            onChange={(e) => {
+              setShowFeedback(false);
+              handleChange(e);
+            }}
             id="name"
             type="text"
             name="name"
@@ -66,7 +70,10 @@ function Profile(props) {
           <input
             className="profile__input form__input_last"
             required
-            onChange={handleChange}
+            onChange={(e) => {
+              setShowFeedback(false);
+              handleChange(e);
+            }}
             id="email"
             name="email"
             type="email"
@@ -77,8 +84,8 @@ function Profile(props) {
           />
           <span className="form__error">{errors.email}</span>
         </label>
-        {!touched && props.error && <span className="form__error">{props.error}</span>}
-        {!touched && props.successProfileEditing && <span className="form__success">Данные успешно обновлены</span>}
+        {showFeedback && props.error && <span className="form__error">{props.error}</span>}
+        {showFeedback && props.successProfileEditing && <span className="form__success">Данные успешно обновлены</span>}
         <button
           className={`profile__button ${
             !isValid || isDisabled || isSubmitting ? "profile__button_disabled" : ""
