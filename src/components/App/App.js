@@ -137,6 +137,8 @@ function App() {
   // обработчик обновления данных пользователя
   function handleUpdateUser(name, email) {
     const updatedUser = { name, email };
+    setSuccessProfileEditing(false);
+    setProfileError(false);
     return api
       .setUserInfo(updatedUser)
       .then((res) => {
