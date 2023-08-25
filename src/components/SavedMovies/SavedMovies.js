@@ -1,58 +1,93 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
-// import MoviesCard from "../Movies/Movies"
-function SavedMovies() {
+import Preloader from "../Preloader/Preloader";
+
+function SavedMovies(props) {
+  const [foundMovies, setFoundMovies] = useState(props.isSavedMovies); // массив найденных фильмов по запросу
+  const [isCheckbox, setIsCheckbox] = useState(false); // состояние чекбокса короткометражек
+  
+  const [isLoading, setIsLoading] = useState(true); // состояние загрузки
+  const [error, setError] = useState(null); // состояние ошибки
+  
+  const saveSearchQuery = false;
+  // фильтрация фильмов (короткометражки)
+  function filterShortMovies(foundMovies) {
+    return foundMovies.filter((movie) => movie.duration <= 40);
+  }
+
+  // переключение чекбокса короткометражек
+  function handleShortMoviesCheckbox(checked, query) {
+    setIsCheckbox(checked);
+    if (!checked) {
+      setFoundMovies(filterShortMovies(foundMovies));
+    } else {
+      setFoundMovies(foundMovies);
+    }
+    handleFilterMovies(query, checked);
+  }
+  
+  useEffect(() => {
+    setFoundMovies(props.isSavedMovies);
+  }, [props.isSavedMovies]);
+
+  // поиск фильмов
+  function handleSearch(query) {
+    console.log("query", query);
+    console.log("saved movies", props.isSavedMovies);
+    const initialMovies = props.isSavedMovies.filter((movie) => {
+      const movieRu = String(movie.nameRU).toLowerCase().trim();
+      const newQuery = query.toLowerCase().trim();
+      console.log("movieRu", movieRu);
+      console.log("newQuery", newQuery);
+      console.log(movieRu.indexOf(newQuery) !== -1);
+      return movieRu.indexOf(newQuery) !== -1;
+    });
+    console.log("initialMovies", initialMovies);
+    return initialMovies;
+  }
+
+  function handleFilterMovies(query, short) {
+    setIsLoading(true);
+    setError(null);
+
+    const moviesList = handleSearch(query);
+    setFoundMovies(short ? filterShortMovies(moviesList) : moviesList);
+    setIsLoading(false);
+  }
+
+  function handleSearchFormSubmit(query) {
+    handleFilterMovies(query, isCheckbox);
+  }
+  console.log("saved movies", foundMovies);
+
   return (
     <div className="saved-movies__section">
-      <SearchForm />
-      <section className="movies-card-list">
-        <div className="movies-card">
-          <div className="movies-card__info">
-            <div className="movies-card__text">
-              <h4 className="movies-card__name">33 слова о дизайне</h4>
-              <p className="movies-card__duration">1ч 47м</p>
-            </div>
-            <button className="movies-card__delete-film-button"></button>
-          </div>
-          <img
-            className="movies-card__image"
-            alt="Обложка фильма"
-            src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-          />
-        </div>
-
-        <div className="movies-card">
-          <div className="movies-card__info">
-            <div className="movies-card__text">
-              <h4 className="movies-card__name">33 слова о дизайне</h4>
-              <p className="movies-card__duration">1ч 47м</p>
-            </div>
-            <button className="movies-card__delete-film-button"></button>
-          </div>
-          <img
-            className="movies-card__image"
-            alt="Обложка фильма"
-            src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-          />
-        </div>
-
-        <div className="movies-card">
-          <div className="movies-card__info">
-            <div className="movies-card__text">
-              <h4 className="movies-card__name">33 слова о дизайне</h4>
-              <p className="movies-card__duration">1ч 47м</p>
-            </div>
-            <button className="movies-card__delete-film-button"></button>
-          </div>
-          <img
-            className="movies-card__image"
-            alt="Обложка фильма"
-            src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-          />
-        </div>
-
-        {/* <MoviesCard/> */}
-      </section>
+      <SearchForm
+        handleSearchFormSubmit={handleSearchFormSubmit}
+        isCheckbox={isCheckbox}
+        onCheckbox={handleShortMoviesCheckbox}
+        saveSearchQuery={saveSearchQuery}
+      />
+      {/* {isLoading ? (
+        <Preloader />
+      ) : error ? (
+        <p className="movies__error">
+          Во время запроса произошла ошибка. Возможно, проблема с соединением
+          или сервер недоступен. Подождите немного и попробуйте ещё раз.
+        </p>
+      ) : foundMovies.length === 0 ? (
+        <p className="movies__error">Ничего не найдено</p>
+      ) : ( */}
+        <MoviesCardList
+          // onClick={props.onClick}
+          // onClick={props.onClick}
+          // isSavedMovies={props.isSavedMovies}
+          isSavedMovies={props.isSavedMovies}
+          movies={foundMovies}
+          onClick={props.onClick}
+        />
+      {/* )} */}
     </div>
   );
 }

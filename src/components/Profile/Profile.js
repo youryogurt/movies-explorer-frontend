@@ -1,32 +1,104 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import useValidation from "../../hooks/useFormValidation.js";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
-function Profile() {
+function Profile(props) {
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
+
+  const { values, handleChange, errors, isValid, resetForm } = useValidation({
+    name: "",
+    email: "",
+  });
+
+  const currentUser = useContext(CurrentUserContext);
+
+  useEffect(() => {
+    resetForm({ email: currentUser.email, name: currentUser.name });
+  }, [currentUser, resetForm]);
+
+  useEffect(() => {
+    let isActiveButton =
+      currentUser.name !== values.name || currentUser.email !== values.email;
+    setIsDisabled(!isActiveButton);
+  }, [values, currentUser, isValid]);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setShowFeedback(true);
+    if (!isSubmitting && isValid) {
+      setIsSubmitting(true);
+      try {
+        await props.handleUpdateUser(values.name, values.email);
+      } catch (error) {
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
+  }
+  
+  // обработчик выхода из аккаунта
+  function handleLognOut() {
+    props.handleSignOut();
+  }
+
   return (
     <div className="profile__section">
-      <form className="profile__form">
-        <h2 className="profile__title">Привет, Жанна!</h2>
+      <form className="profile__form" onSubmit={handleSubmit}>
+        <h2 className="profile__title">Привет, {currentUser.name}!</h2>
         <label className="profile__label">
           Имя
-          <input className="profile__input" defaultValue="Жанна" required />
-          <span className="form__error"></span>
+          <input
+            className="profile__input"
+            required
+            onChange={(e) => {
+              setShowFeedback(false);
+              handleChange(e);
+            }}
+            id="name"
+            type="text"
+            name="name"
+            value={values.name || ""}
+            placeholder={currentUser.name}
+            pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"
+          />
+          <span className="profile__form-error">{errors.name}</span>
         </label>
         <label className="profile__label">
           E-mail
           <input
             className="profile__input form__input_last"
-            defaultValue="zhanna.gurt@gmail.com"
             required
+            onChange={(e) => {
+              setShowFeedback(false);
+              handleChange(e);
+            }}
+            id="email"
+            name="email"
+            type="email"
+            minLength={4}
+            value={values.email || ""}
+            placeholder={currentUser.email}
+            pattern="\S+@\S+\.\S+"
           />
-          <span className="form__error"></span>
+          <span className="form__error">{errors.email}</span>
         </label>
+        {showFeedback && props.error && <span className="form__error">{props.error}</span>}
+        {showFeedback && props.successProfileEditing && <span className="form__success">Данные успешно обновлены</span>}
+        <button
+          className={`profile__button ${
+            !isValid || isDisabled || isSubmitting ? "profile__button_disabled" : ""
+          }`}
+          disabled={!isValid || isDisabled || isSubmitting}
+          type="submit"
+        >
+          Редактировать
+        </button>
+        <button className="profile__button_logout" onClick={handleLognOut}>
+          Выйти из аккаунта
+        </button>
       </form>
-      <Link className="profile__button" to="/edit">
-        Редактировать
-      </Link>
-      <Link className="profile__link" to="/signin">
-        Выйти из аккаунта
-      </Link>
     </div>
   );
 }

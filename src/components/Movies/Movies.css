@@ -1,6 +1,6 @@
 .more-button {
   align-self: center;
-  margin: 90px auto 260px auto;
+  margin: 90px auto 80px auto;
   background-color: #202020;
   border: 1px solid #424242;
   max-width: 320px;
@@ -22,6 +22,19 @@
 .more-button:hover {
   opacity: 0.7;
   transition: all .5s;
+}
+
+.movies__error {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FFFFFF;
+  margin-top: 90px;
 }
 
 @media screen and (max-width: 560px) {

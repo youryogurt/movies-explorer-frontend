@@ -41,6 +41,8 @@
   font-size: 14px;
   line-height: 17px;
   color: #4285F4;
+  border: none;
+  background: none;
 }
 
 @media screen and (max-width: 6) {
